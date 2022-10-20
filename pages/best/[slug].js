@@ -1,18 +1,18 @@
 import client from '../../src/apollo/client';
-import {isEmpty} from 'lodash';
+import { isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
 import Layout from '../../src/components/layout';
-import {FALLBACK, handleRedirectsAndReturnData} from '../../src/utils/slug';
-import {GET_POST} from '../../src/queries/posts/get-post';
-import {GET_POST_SLUGS} from '../../src/queries/posts/get-posts';
-import {sanitize} from '../../src/utils/miscellaneous';
+import { FALLBACK, handleRedirectsAndReturnData } from '../../src/utils/slug';
+import { GET_POST } from '../../src/queries/posts/get-post';
+import { GET_POST_SLUGS } from '../../src/queries/posts/get-posts';
+import { sanitize } from '../../src/utils/miscellaneous';
 
-const Post = ( { data } ) => {
+const Post = ({ data }) => {
 	const router = useRouter();
-
+	console.warn(data)
 	// If the page is not yet generated, this will be displayed
 	// initially until getStaticProps() finishes running
-	if ( router.isFallback ) {
+	if (router.isFallback) {
 		return <div>Loading...</div>;
 	}
 
@@ -562,27 +562,27 @@ const Post = ( { data } ) => {
 
 export default Post;
 
-export async function getStaticProps( { params } ) {
-	const { data, errors } = await client.query( {
+export async function getStaticProps({ params }) {
+	const { data, errors } = await client.query({
 		query: GET_POST,
 		variables: {
 			uri: params?.slug ?? '/',
 		},
-	} );
+	});
 
 	const defaultProps = {
 		props: {
 			data: data || {}
 		},
 		/**
-         * Revalidate means that if a new request comes to server, then every 1 sec it will check
-         * if the data is changed, if it is changed then it will update the
-         * static file inside .next folder with the new data, so that any 'SUBSEQUENT' requests should have updated data.
-         */
+		 * Revalidate means that if a new request comes to server, then every 1 sec it will check
+		 * if the data is changed, if it is changed then it will update the
+		 * static file inside .next folder with the new data, so that any 'SUBSEQUENT' requests should have updated data.
+		 */
 		revalidate: 1,
 	};
 
-	return handleRedirectsAndReturnData( defaultProps, data, errors, 'post' );
+	return handleRedirectsAndReturnData(defaultProps, data, errors, 'post');
 }
 
 /**
@@ -603,17 +603,17 @@ export async function getStaticProps( { params } ) {
  * @returns {Promise<{paths: [], fallback: boolean}>}
  */
 export async function getStaticPaths() {
-	const { data } = await client.query( {
+	const { data } = await client.query({
 		query: GET_POST_SLUGS
-	} );
+	});
 
 	const pathsData = [];
 
-	data?.posts?.nodes && data?.posts?.nodes.map( post => {
-		if ( ! isEmpty( post?.slug ) ) {
-			pathsData.push( {params: { slug: post?.slug }} );
+	data?.posts?.nodes && data?.posts?.nodes.map(post => {
+		if (!isEmpty(post?.slug)) {
+			pathsData.push({ params: { slug: post?.slug } });
 		}
-	} );
+	});
 
 	return {
 		paths: pathsData,

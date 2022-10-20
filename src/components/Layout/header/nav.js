@@ -1,6 +1,7 @@
 import { isEmpty } from "lodash"
 import { useState } from 'react'
 import Link from "next/link";
+import PropTypes from 'prop-types';
 import { isCustomPageUri } from '../../../utils/slug';
 
 const Nav = ({ footer, header, headerMenus, slug }) => {
@@ -17,8 +18,8 @@ const Nav = ({ footer, header, headerMenus, slug }) => {
 
     <header>
       {/* Level 1 */}
-      <nav className="bg-white border-gray-200 dark:border-gray-600 dark:bg-gray-800">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-2xl px-4 md:px-6 py-1">
+      <nav className="bg-green-400  dark:border-gray-600 dark:bg-gray-800">
+        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-2xl px-4 md:px-4 py-1">
           <Link href="/">
             <a href="https://flowbite.com" className="flex items-center">
               <img src={header?.siteLogoUrl} className="-mb-" alt="" width="40" height="40" />
@@ -100,7 +101,7 @@ const Nav = ({ footer, header, headerMenus, slug }) => {
 
             {/* HEre are the social Icons */}
             <span className="mr-0 ml-2 w-px h-5 bg-gray-200 dark:bg-gray-600 lg:inline lg:mr-3 lg:ml-3"></span>
-            <a href={footer?.socialLinks[0]?.iconUrl} className="border inline-flex items-center p-2 text-sm font-medium text-gray-500  rounded-none dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <a href={footer?.socialLinks[0]?.iconUrl} className="inline-flex items-center p-2 text-sm font-medium text-gray-500  rounded-none dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600">
               <svg className="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" /></svg>
             </a>
 
@@ -117,8 +118,8 @@ const Nav = ({ footer, header, headerMenus, slug }) => {
         </div>
       </nav>
       {/* Level 2 */}
-      <nav className="bg-white border-gray-200 dark:bg-gray-700 dark:border-gray-600 border-y">
-        <div className="grid py-2 px-4 mx-auto max-w-screen-2xl lg:grid-cols-2 md:px-6">
+      <nav className="bg-green-300  dark:bg-gray-700 dark:border-gray-600 pr-4">
+        <div className="grid py-2 px-4 mx-auto max-w-screen-2xl lg:grid-cols-2 md:px-2">
           <form className="flex mb-4 lg:order-2 lg:mb-0">
             <label htmlFor="search-dropdown" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
             <button id="dropdown-button" data-dropdown-toggle="dropdown" className="hidden md:inline-flex flex-shrink-0 z-10 items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-200 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">All categories <svg className="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg></button>
@@ -139,7 +140,7 @@ const Nav = ({ footer, header, headerMenus, slug }) => {
               </ul>
             </div>
             <div className="relative w-full">
-              <input type="search" id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50  rounded-none md:rounded-l-none md:border-l-gray-50 border-l-1 md:border-l-6 border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:border-l-gray-600  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-primary-500" placeholder="Search anything..." required />
+              <input type="search" id="search-dropdown" className="block p-2.5 w-full  z-20 text-sm text-gray-900 bg-gray-50  rounded-none md:rounded-l-none md:border-l-gray-50 border-l-1 md:border-l-6 border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:border-l-gray-600  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-primary-500" placeholder="Search anything..." required />
               <button type="submit" className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-primary-700 border-primary-500 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
             </div>
           </form>
@@ -149,7 +150,7 @@ const Nav = ({ footer, header, headerMenus, slug }) => {
                 <a href="#" className="text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-500 dark:hover:bg-gray-600 p-4" aria-current="page">Home</a>
               </li>
               <li>
-                <button onClick={() => setMenuVisibility(!isMenuVisible)} id="dropdown-button-megamenu" data-collapse-toggle="megamenu" className="flex justify-between items-center w-full font-medium dark:hover:text-primary-500 md:p-0 md:w-auto dark:text-white hover:text-primary-500 dark:focus:text-primary-500">Animals <svg className="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg></button>
+                <button onClick={() => setMenuVisibility(!isMenuVisible)} id="dropdown-button-megamenu" data-collapse-toggle="megamenu" className="flex justify-between items-center w-full font-medium dark:hover:text-primary-500 md:p-0 md:w-auto dark:text-white hover:text-primary-500 dark:focus:text-primary-500">Shop By Pet<svg className="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg></button>
               </li>
               <li>
                 <a href="#" className="text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-500">Marketplace</a>
@@ -238,19 +239,19 @@ const Nav = ({ footer, header, headerMenus, slug }) => {
   )
 }
 
+Nav.propTypes = {
+  header: PropTypes.object,
+  headerMenus: PropTypes.array,
+  slug: PropTypes.string
+};
+
+Nav.defaultProps = {
+  header: {},
+  headerMenus: [],
+  slug: ''
+};
+
 export default Nav
-
-{/* <a href="#responsive-header" classNameName="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-              Docs
-            </a>
-            <a href="#responsive-header" classNameName="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-              Examples
-            </a>
-            <a href="#responsive-header" classNameName="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
-              Blog
-            </a> */}
-
-
 
 
 // <nav classNameName="bg-black flex items-center justify-between flex-wrap p-6">

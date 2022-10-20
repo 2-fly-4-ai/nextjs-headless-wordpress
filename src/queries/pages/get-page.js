@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import MenuFragment from "../fragments/menus";
-import { HeaderFooter } from "../get-menus";
-
+import { HeaderFooter } from "../../../get-menus";
+import SeoFragment from "../fragments/seo";
 
 export const GET_PAGE = gql`
 	query GET_PAGE($uri: String) {
@@ -12,10 +12,14 @@ export const GET_PAGE = gql`
 	    content
 	    slug
 	    uri
+	    seo {
+          ...SeoFragment
+        }
 	  }
 	}
-	${MenuFragment}`
-
+	${MenuFragment}
+	${SeoFragment}
+`;
 
 export const GET_PAGE_BY_ID = gql`
 	query GET_PAGE_BY_ID($id: ID!) {
@@ -26,10 +30,12 @@ export const GET_PAGE_BY_ID = gql`
 	    content
 	    slug
 	    uri
-	    
-		
+	    seo {
+          ...SeoFragment
+        }
+		status
 	  }
 	}
 	${MenuFragment}
-	
+	${SeoFragment}
 `;

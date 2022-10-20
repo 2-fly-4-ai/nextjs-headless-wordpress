@@ -9,7 +9,7 @@ const Footer = ({ footer, footerMenus, footerMenus1, footerMenus2, footerMenus3,
 
 
 
-		<footer className="bg-gray-50 dark:bg-gray-800">
+		<footer className="bg-green-400 dark:bg-gray-800">
 			<div className="p-4 py-6 mx-auto max-w-screen-xl md:p-8 lg:-10 ">
 				<div className=" grid-cols-2 gap-8 lg:grid-cols-4 margin-auto justify-center flex">
 

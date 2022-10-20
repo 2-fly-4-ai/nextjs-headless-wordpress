@@ -16,6 +16,6 @@ module.exports = {
     includePaths: [path.join(__dirname, 'styles')]
   },
   images: {
-    domains: [allowedImageWordPressDomain, 'staging-petsmarketplace-staging.kinsta.cloud', "m.media-amazon.com"],
+    domains: [allowedImageWordPressDomain, 'staging-petsmarketplace-staging.kinsta.cloud', "m.media-amazon.com", "via.placeholder.com"],
   },
 }
