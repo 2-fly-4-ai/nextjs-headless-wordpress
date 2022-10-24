@@ -2,6 +2,7 @@ import '../src/styles/index.scss';
 import { ApolloProvider } from '@apollo/client';
 import client from '../src/apollo/client';
 
+
 // import Router from 'next/router';
 // import NProgress from 'nprogress';
 
@@ -12,9 +13,11 @@ import client from '../src/apollo/client';
 
 function MyApp({ Component, pageProps }) {
 	return (
+
 		<ApolloProvider client={client}>
 			<Component {...pageProps} />
 		</ApolloProvider>
+
 	);
 }
 

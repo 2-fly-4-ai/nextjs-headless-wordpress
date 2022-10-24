@@ -4,23 +4,26 @@ import Link from 'next/link';
 import { getIconComponentByName } from '../../../utils/icons-map';
 
 
-const Footer = ({ footer, footerMenus, footerMenus1, footerMenus2, footerMenus3, footerMenus4 }) => {
+const Footer = ({ footer, footerMenus1, footerMenus2, footerMenus3, footerMenus4 }) => {
+
+
+
 	return (
 
 
 
-		<footer className="bg-green-400 dark:bg-gray-800">
+		<footer className="bg-green-900 dark:bg-gray-800">
 			<div className="p-4 py-6 mx-auto max-w-screen-xl md:p-8 lg:-10 ">
 				<div className=" grid-cols-2 gap-8 lg:grid-cols-4 margin-auto justify-center flex">
 
 					<div className="lg:mx-auto">
-						<h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Footer1</h2>
+						<h2 className="mb-2 text-sm font-bold text-gray-100 uppercase dark:text-white">Footer1</h2>
 						{!isEmpty(footerMenus1) && isArray(footerMenus1) ? (
-							<ul>
+							<ul >
 								{footerMenus1.map(footerMenu => (
 									<li key={footerMenu?.node?.id} className="text-gray-500 dark:text-gray-400">
 										<Link href={footerMenu?.node?.path}>
-											<a>
+											<a className='text-gray-100  '>
 												{footerMenu?.node?.label}
 											</a>
 										</Link>
@@ -31,13 +34,13 @@ const Footer = ({ footer, footerMenus, footerMenus1, footerMenus2, footerMenus3,
 					</div>
 
 					<div className="lg:mx-auto">
-						<h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Footer 2</h2>
+						<h2 className="mb-2 text-sm font-bold text-gray-100 uppercase dark:text-white">Footer 2</h2>
 						{!isEmpty(footerMenus2) && isArray(footerMenus2) ? (
 							<ul>
 								{footerMenus2.map(footerMenu => (
 									<li key={footerMenu?.node?.id} className="text-gray-500 dark:text-gray-400">
 										<Link href={footerMenu?.node?.path}>
-											<a>
+											<a className='text-gray-100  '>
 												{footerMenu?.node?.label}
 											</a>
 										</Link>
@@ -47,13 +50,13 @@ const Footer = ({ footer, footerMenus, footerMenus1, footerMenus2, footerMenus3,
 						) : null}
 					</div>
 					<div className="lg:mx-auto">
-						<h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Footer 3</h2>
+						<h2 className="mb-2 text-sm font-bold text-gray-100 uppercase dark:text-white">Footer 3</h2>
 						{!isEmpty(footerMenus3) && isArray(footerMenus3) ? (
 							<ul>
 								{footerMenus3.map(footerMenu => (
 									<li key={footerMenu?.node?.id} className="text-gray-500 dark:text-gray-400">
 										<Link href={footerMenu?.node?.path}>
-											<a>
+											<a className='text-gray-100  '>
 												{footerMenu?.node?.label}
 											</a>
 										</Link>
@@ -63,13 +66,13 @@ const Footer = ({ footer, footerMenus, footerMenus1, footerMenus2, footerMenus3,
 						) : null}
 					</div>
 					<div className="lg:mx-auto">
-						<h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Footer 4</h2>
+						<h2 className="mb-2 text-sm font-bold text-gray-100 uppercase dark:text-white">Footer 4</h2>
 						{!isEmpty(footerMenus4) && isArray(footerMenus4) ? (
 							<ul>
 								{footerMenus4.map(footerMenu => (
 									<li key={footerMenu?.node?.id} className="text-gray-500 dark:text-gray-400">
 										<Link href={footerMenu?.node?.path}>
-											<a>
+											<a className='text-gray-100 '>
 												{footerMenu?.node?.label}
 											</a>
 										</Link>
@@ -80,9 +83,12 @@ const Footer = ({ footer, footerMenus, footerMenus1, footerMenus2, footerMenus3,
 					</div>
 				</div>
 
-				<hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-				<span className="block text-sm text-center text-gray-500 dark:text-gray-400">{footer?.copyrightText}</span>
+				<hr className="border-green-900 sm:mx-auto dark:border-gray-700 mt-8 " />
 			</div >
+			<div className='bg-black py-1'>
+
+				<span className="my-auto block text-sm text-center text-gray-100 font-bold  dark:text-gray-400">{footer?.copyrightText}</span>
+			</div>
 		</footer >
 
 

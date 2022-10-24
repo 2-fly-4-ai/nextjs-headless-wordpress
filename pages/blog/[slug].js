@@ -9,6 +9,7 @@ import {sanitize} from '../../src/utils/miscellaneous';
 
 const Post = ( { data } ) => {
 	const router = useRouter();
+	console.warn({ data })
 
 	// If the page is not yet generated, this will be displayed
 	// initially until getStaticProps() finishes running
@@ -25,12 +26,12 @@ const Post = ( { data } ) => {
 
 				<div className="flex relative z-20 justify-between px-4 mx-auto max-w-screen-xl bg-white dark:bg-gray-900 rounded">
 
-					<article className="xl:w-[828px] w-full max-w-none format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-						<header class="py-12">
-							<div class="px-4 mx-auto w-full max-w-screen-xl text-center">
-								<span class="block mb-4 font-semibold text-gray-900 dark:text-white">Published <time class="font-normal text-gray-500 dark:text-gray-400" pubdate class="uppercase" datetime="2022-03-08" title="August 3rd, 2022">August 3, 2022, 2:20am EDT</time></span>
-								<h1 class="mx-auto mb-4 max-w-2xl text-2xl dark:text-white font-extrabold leading-none text-gray-900 sm:text-3xl lg:text-4xl">Flowbite Blocks Tutorial - Learn how to get started with custom sections using the Flowbite Blocks</h1>
-								<p class="text-lg font-normal text-gray-500 dark:text-gray-400">Before going digital, you might scribbling down some ideas in a sketchbook.</p>
+					<article className="xl:w-[828px] w-full max-w-none htmlFormat htmlFormat-sm sm:format-base lg:format-lg htmlFormat-blue dark:format-invert">
+						<header className="py-12">
+							<div className="px-4 mx-auto w-full max-w-screen-xl text-center">
+								<span className="block mb-4 font-semibold text-gray-900 dark:text-white">Published <time className="font-normal text-gray-500 dark:text-gray-400" dateTime="2022-03-08" title="August 3rd, 2022">August 3, 2022, 2:20am EDT</time></span>
+								<h1 className="mx-auto mb-4 max-w-2xl text-2xl dark:text-white font-extrabold leading-none text-gray-900 sm:text-3xl lg:text-4xl">Flowbite Blocks Tutorial - Learn how to get started with custom sections using the Flowbite Blocks</h1>
+								<p className="text-lg font-normal text-gray-500 dark:text-gray-400">Before going digital, you might scribbling down some ideas in a sketchbook.</p>
 							</div>
 						</header>
 						<div className="flex flex-col lg:flex-row justify-between lg:items-center py-6 border-t border-b border-gray-200 dark:border-gray-700">
@@ -54,9 +55,9 @@ const Post = ( { data } ) => {
 									className="inline-flex items-center py-2 px-6 text-xs font-medium text-gray-900 no-underline bg-white rounded-lg border border-gray-200 focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"><svg
 										className="mr-2 w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
 										xmlns="http://www.w3.org/2000/svg">
-										<path fill-rule="evenodd"
+										<path fillRule="evenodd"
 											d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
-											clip-rule="evenodd"></path>
+											clipRule="evenodd"></path>
 									</svg> Copy link</button>
 							</aside>
 						</div>
@@ -81,14 +82,14 @@ const Post = ( { data } ) => {
 									className="inline-flex items-center py-2 px-6 text-xs font-medium text-gray-900 no-underline bg-white rounded-lg border border-gray-200 focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"><svg
 										className="mr-2 w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
 										xmlns="http://www.w3.org/2000/svg">
-										<path fill-rule="evenodd"
+										<path fillRule="evenodd"
 											d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
-											clip-rule="evenodd"></path>
+											clipRule="evenodd"></path>
 									</svg> Copy link</button>
 							</aside>
 							<div className="not-format">
 								<button data-tooltip-target="tooltip-save" className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-gray-400 focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600" type="button">
-									<svg className="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+									<svg className="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
 								</button>
 								<div id="tooltip-save" role="tooltip" className="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
 									Save this article
@@ -122,7 +123,7 @@ const Post = ( { data } ) => {
 								<div
 									className="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-700">
 									<div className="py-2 px-4 bg-gray-50 rounded-t-lg dark:bg-gray-800">
-										<label for="comment" className="sr-only">Your comment</label>
+										<label htmlFor="comment" className="sr-only">Your comment</label>
 										<textarea id="comment" rows="6"
 											className="px-0 w-full text-sm text-gray-900 bg-gray-50 border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
 											placeholder="Write a comment..." required></textarea>
@@ -137,9 +138,9 @@ const Post = ( { data } ) => {
 												className="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
 												<svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
 													xmlns="http://www.w3.org/2000/svg">
-													<path fill-rule="evenodd"
+													<path fillRule="evenodd"
 														d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-														clip-rule="evenodd"></path>
+														clipRule="evenodd"></path>
 												</svg>
 												<span className="sr-only">Attach file</span>
 											</button>
@@ -147,9 +148,9 @@ const Post = ( { data } ) => {
 												className="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
 												<svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
 													xmlns="http://www.w3.org/2000/svg">
-													<path fill-rule="evenodd"
+													<path fillRule="evenodd"
 														d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-														clip-rule="evenodd"></path>
+														clipRule="evenodd"></path>
 												</svg>
 												<span className="sr-only">Set location</span>
 											</button>
@@ -157,9 +158,9 @@ const Post = ( { data } ) => {
 												className="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
 												<svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
 													xmlns="http://www.w3.org/2000/svg">
-													<path fill-rule="evenodd"
+													<path fillRule="evenodd"
 														d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-														clip-rule="evenodd"></path>
+														clipRule="evenodd"></path>
 												</svg>
 												<span className="sr-only">Upload image</span>
 											</button>
@@ -174,7 +175,7 @@ const Post = ( { data } ) => {
 											className="mr-2 w-6 h-6 rounded-full"
 											src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
 											alt="Michael Gough" />Michael Gough</p>
-										<p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
+										<p className="text-sm text-gray-600 dark:text-gray-400"><time dateTime="2022-02-08"
 											title="February 8th, 2022">Feb. 8, 2022</time></p>
 									</div>
 									<button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
@@ -209,16 +210,16 @@ const Post = ( { data } ) => {
 									</div>
 								</footer>
 								<p className="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really worth time reading. Thank you! But tools are just the
-									instruments for the UX designers. The knowledge of the design tools are as important as the
+									instrumentshtmlForthe UX designers. The knowledge of the design tools are as important as the
 									creation of the design strategy.</p>
 								<div className="flex items-center mt-4 space-x-4">
 									<button type="button"
 										className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
 										<svg aria-hidden="true" className="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
 											xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd"
+											<path fillRule="evenodd"
 												d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-												clip-rule="evenodd"></path>
+												clipRule="evenodd"></path>
 										</svg>
 										11 Likes
 									</button>
@@ -226,9 +227,9 @@ const Post = ( { data } ) => {
 										className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
 										<svg aria-hidden="true" className="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
 											xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd"
+											<path fillRule="evenodd"
 												d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-												clip-rule="evenodd"></path>
+												clipRule="evenodd"></path>
 										</svg>
 										Reply
 									</button>
@@ -241,7 +242,7 @@ const Post = ( { data } ) => {
 											className="mr-2 w-6 h-6 rounded-full"
 											src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
 											alt="Jese Leos" />Jese Leos</p>
-										<p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
+										<p className="text-sm text-gray-600 dark:text-gray-400"><time dateTime="2022-02-12"
 											title="February 12th, 2022">Feb. 12, 2022</time></p>
 									</div>
 									<button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2"
@@ -281,9 +282,9 @@ const Post = ( { data } ) => {
 										className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
 										<svg aria-hidden="true" className="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
 											xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd"
+											<path fillRule="evenodd"
 												d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-												clip-rule="evenodd"></path>
+												clipRule="evenodd"></path>
 										</svg>
 										3 Likes
 									</button>
@@ -291,9 +292,9 @@ const Post = ( { data } ) => {
 										className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
 										<svg aria-hidden="true" className="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
 											xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd"
+											<path fillRule="evenodd"
 												d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-												clip-rule="evenodd"></path>
+												clipRule="evenodd"></path>
 										</svg>
 										Reply
 									</button>
@@ -306,7 +307,7 @@ const Post = ( { data } ) => {
 											className="mr-2 w-6 h-6 rounded-full"
 											src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
 											alt="Bonnie Green" />Bonnie Green</p>
-										<p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-03-12"
+										<p className="text-sm text-gray-600 dark:text-gray-400"><time dateTime="2022-03-12"
 											title="March 12th, 2022">Mar. 12, 2022</time></p>
 									</div>
 									<button id="dropdownComment3Button" data-dropdown-toggle="dropdownComment3"
@@ -346,9 +347,9 @@ const Post = ( { data } ) => {
 										className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
 										<svg aria-hidden="true" className="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
 											xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd"
+											<path fillRule="evenodd"
 												d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-												clip-rule="evenodd"></path>
+												clipRule="evenodd"></path>
 										</svg>
 										24 Likes
 									</button>
@@ -356,9 +357,9 @@ const Post = ( { data } ) => {
 										className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
 										<svg aria-hidden="true" className="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
 											xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd"
+											<path fillRule="evenodd"
 												d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-												clip-rule="evenodd"></path>
+												clipRule="evenodd"></path>
 										</svg>
 										Reply
 									</button>
@@ -371,7 +372,7 @@ const Post = ( { data } ) => {
 											className="mr-2 w-6 h-6 rounded-full"
 											src="https://flowbite.com/docs/images/people/profile-picture-4.jpg"
 											alt="Helene Engels" />Helene Engels</p>
-										<p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-06-23"
+										<p className="text-sm text-gray-600 dark:text-gray-400"><time dateTime="2022-06-23"
 											title="June 23rd, 2022">Jun. 23, 2022</time></p>
 									</div>
 									<button id="dropdownComment4Button" data-dropdown-toggle="dropdownComment4"
@@ -404,15 +405,15 @@ const Post = ( { data } ) => {
 										</ul>
 									</div>
 								</footer>
-								<p className="text-gray-500 dark:text-gray-400">Thanks for sharing this. I do came from the Backend development and explored some of the tools to design my Side Projects.</p>
+								<p className="text-gray-500 dark:text-gray-400">ThankshtmlForsharing this. I do came from the Backend development and explored some of the tools to design my Side Projects.</p>
 								<div className="flex items-center mt-4 space-x-4">
 									<button type="button"
 										className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
 										<svg aria-hidden="true" className="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
 											xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd"
+											<path fillRule="evenodd"
 												d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-												clip-rule="evenodd"></path>
+												clipRule="evenodd"></path>
 										</svg>
 										9 Likes
 									</button>
@@ -420,9 +421,9 @@ const Post = ( { data } ) => {
 										className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
 										<svg aria-hidden="true" className="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
 											xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd"
+											<path fillRule="evenodd"
 												d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-												clip-rule="evenodd"></path>
+												clipRule="evenodd"></path>
 										</svg>
 										Reply
 									</button>
@@ -437,7 +438,7 @@ const Post = ( { data } ) => {
 								<h4 className="mb-2 text-sm font-bold text-gray-900 dark:text-white uppercase">Flowbite News morning headlines</h4>
 								<p className="mb-4 text-sm font-light text-gray-500 dark:text-gray-400">Get all the stories you need-to-know from the most powerful name in news delivered first thing every morning to your inbox</p>
 								<form action="#">
-									<label for="email-address-icon" className="sr-only">Your Email</label>
+									<label htmlFor="email-address-icon" className="sr-only">Your Email</label>
 									<div className="relative mb-4">
 										<div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
 											<svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
@@ -473,7 +474,7 @@ const Post = ( { data } ) => {
 							</div>
 							<div>
 								<div className="flex justify-center items-center mb-3 w-full h-48 bg-gray-100 rounded-lg dark:bg-gray-800">
-									<svg aria-hidden="true" className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
+									<svg aria-hidden="true" className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd"></path></svg>
 								</div>
 								<p className="mb-2 text-sm font-light text-gray-500 dark:text-gray-400">Students and Teachers, save up to 60% on Flowbite Creative Cloud.</p>
 								<p className="text-xs font-light text-gray-400 uppercase dark:text-gray-500">Ads placeholder</p>
@@ -534,12 +535,12 @@ const Post = ( { data } ) => {
 			<section className="bg-white dark:bg-gray-900 px-4">
 				<div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
 					<div className="mx-auto max-w-screen-md sm:text-center">
-						<h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-white">Sign up for our newsletter</h2>
+						<h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-white">Sign uphtmlForour newsletter</h2>
 						<p className="mx-auto mb-8 max-w-2xl font-light text-gray-500 md:mb-12 sm:text-xl dark:text-gray-400">Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email.</p>
 						<form action="#">
 							<div className="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
 								<div className="relative w-full">
-									<label for="email" className="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
+									<label htmlFor="email" className="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
 									<div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
 										<svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
 									</div>
@@ -587,9 +588,9 @@ export async function getStaticProps( { params } ) {
 
 /**
  * Since the page name 'does not' use catch-all routes,
- * for example [slug],
+ *htmlForexample [slug],
  * that's why params would contain just slug and not an array of slugs , unlike [...slug].
- * For example, If we need to have dynamic route '/foo/'
+ *htmlForexample, If we need to have dynamic route '/foo/'
  * Then we would add paths: [ params: { slug: 'foo' } } ]
  * Here slug will be 'foo', then Next.js will statically generate the page at /foo/
  *
@@ -607,15 +608,20 @@ export async function getStaticPaths() {
 		query: GET_POST_SLUGS
 	} );
 
+
+
 	const pathsData = [];
 
 	data?.posts?.nodes && data?.posts?.nodes.map( post => {
 		if ( ! isEmpty( post?.slug ) ) {
 			pathsData.push( {params: { slug: post?.slug }} );
 		}
+
 	} );
 
+	console.warn(pathsData)
 	return {
+
 		paths: pathsData,
 		fallback: FALLBACK
 	};

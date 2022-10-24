@@ -8,6 +8,7 @@ import { FALLBACK, handleRedirectsAndReturnData, isCustomPageUri } from '../src/
 import { sanitize } from '../src/utils/miscellaneous';
 
 const Page = ({ data }) => {
+	console.warn(data)
 	const router = useRouter();
 
 	// If the page is not yet generated, this will be displayed
@@ -18,10 +19,10 @@ const Page = ({ data }) => {
 
 	return (
 		<Layout data={data}>
-			<div class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-700 flex min-h-almost-screen max-w-screen-2xl m-auto">
-				<div class="flex justify-between px-6 m-auto max-w-screen-xl  prose-headings:text-white prose-p:text-white prose-em:text-white prose-strong:text-white prose-li:text-white">
+			<div className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-700 flex min-h-almost-screen max-w-screen-2xl m-auto">
+				<div className="flex justify-between px-6 m-auto max-w-screen-xl  prose-headings:text-white prose-p:text-white prose-em:text-white prose-strong:text-white prose-li:text-white">
 
-					<div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: sanitize(data?.page?.content ?? {}) }} />
+					<div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: sanitize(data?.page?.content ?? {}) }} /> 
 				</div>
 			</div>
 		</Layout>

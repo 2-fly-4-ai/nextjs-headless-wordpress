@@ -4,18 +4,10 @@ const allowedImageWordPressDomain = new URL(process.env.NEXT_PUBLIC_WORDPRESS_SI
 
 module.exports = {
   trailingSlash: false,
-  webpackDevMiddleware: config => {
-    config.watchOptions = {
-      poll: 1000,
-      aggregateTimeout: 300
-    }
-
-    return config
-  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')]
   },
   images: {
-    domains: [allowedImageWordPressDomain, 'staging-petsmarketplace-staging.kinsta.cloud', "m.media-amazon.com", "via.placeholder.com"],
+    domains: [allowedImageWordPressDomain, 'staging-petsmarketplace-staging.kinsta.cloud', "m.media-amazon.com", "via.placeholder.com", "cdn.pixabay.com"],
   },
 }

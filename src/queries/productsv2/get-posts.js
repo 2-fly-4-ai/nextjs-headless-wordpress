@@ -2,7 +2,7 @@
 import { gql } from '@apollo/client'
 import MenuFragment from '../fragments/menus'
 import SeoFragment from "../fragments/seo";
-import {HeaderFooter} from "../get-menus";
+import { HeaderFooter } from '../get-menus';
 import ImageFragment from "../fragments/image";
 
 /**
@@ -22,7 +22,7 @@ export const GET_POSTS = gql`
       ...SeoFragment
     }
   }
-  posts: posts(where: { offsetPagination: { size: $perPage, offset: $offset }}) {
+  posts: products(where: { offsetPagination: { size: $perPage, offset: $offset }}) {
     edges {
       node {
         id
@@ -66,7 +66,7 @@ export const GET_TOTAL_POSTS_COUNT = gql`
  */
 export const GET_POST_SLUGS = gql`
  query GET_POST_SLUGS {
-  posts: posts(last: 1) {
+  posts: products(last: 1) {
     nodes {
       id
       slug

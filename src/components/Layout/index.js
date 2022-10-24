@@ -7,13 +7,16 @@ import { sanitize } from '../../utils/miscellaneous';
 import PropTypes from 'prop-types';
 
 const Layout = ({ data, isPost, children }) => {
-    const { page, post, posts, header, footer, headerMenus, footerMenus, footerMenus1, footerMenus2, footerMenus3, footerMenus4 } = data || {};
-    console.warn("FUCKSAKE", page)
+    const { page, post, posts, header, footer, headerMenus, footerMenus, footerMenus1, footerMenus2, footerMenus3 } = data || {};
 
-    // If it does not have either post or page.
+
     if (isEmpty(page) && isEmpty(post) && isEmpty(posts)) {
         return null;
     }
+    // If it does not have either post or page.
+    // if (isEmpty(page) && isEmpty(post) && isEmpty(posts) && isEmpty(product)) {
+    //     return null;
+    // }
 
     const seo = isPost ? (post?.seo ?? {}) : (page?.seo ?? {});
     const uri = isPost ? (post?.uri ?? {}) : (page?.uri ?? {});
@@ -42,6 +45,7 @@ const Layout = ({ data, isPost, children }) => {
 };
 
 Layout.propTypes = {
+
     data: PropTypes.object,
     isPost: PropTypes.bool,
     children: PropTypes.object

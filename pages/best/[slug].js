@@ -430,7 +430,7 @@ const Post = ({ data }) => {
 							</article>
 						</section>
 					</article>
-					<aside className="hidden xl:block" aria-labelledby="sidebar-label">
+					<aside className="hidden xl:block mt-5" aria-labelledby="sidebar-label">
 						<div className="xl:w-[336px] sticky top-6">
 							<h3 id="sidebar-label" className="sr-only">Sidebar</h3>
 							<div className="p-4 mb-6 rounded-lg border border-gray-200 dark:border-gray-700">

@@ -6,6 +6,8 @@ export const isCustomPageUri = ( uri ) => {
 	const pagesToExclude = [
 		'/',
 		'/blog/',
+		'/product/',
+		'/best/',
 		'/news/',
     '/search/'
 	];
@@ -14,6 +16,7 @@ export const isCustomPageUri = ( uri ) => {
 };
 
 export const handleRedirectsAndReturnData = ( defaultProps, data, errors, field, isPreview = false, loginRedirectURL = '' ) => {
+	console.warn(data)
 
 	if ( isPreview && null === data?.[field] ) {
 		return {

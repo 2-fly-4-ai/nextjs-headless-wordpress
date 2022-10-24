@@ -1,8 +1,8 @@
 
-import client from '../src/apollo/client';
-import { GET_PAGE } from '../src/queries/pages/get-page';
-import Layout from '../src/components/layout';
-import { FALLBACK, handleRedirectsAndReturnData, isCustomPageUri } from '../src/utils/slug';
+import client from '../../src/apollo/client';
+import { GET_PAGE } from '../../src/queries/pages/get-page';
+import Layout from '../../src/components/layout';
+import { FALLBACK, handleRedirectsAndReturnData, isCustomPageUri } from '../../src/utils/slug';
 import { Tabs } from 'flowbite-react';
 import { Table } from 'flowbite-react';
 
@@ -10,7 +10,7 @@ import { Table } from 'flowbite-react';
 export default function product({ data }) {
     return (
         <Layout data={data}>
-            <div className="px-6 py-4 flex-col">
+            <div className="px-6 flex-col">
                 <div className="container grid grid-cols-2 gap-6 mx-auto">
                     <div>
                         <div className="container py-4 flex items-center gap-3">
@@ -35,7 +35,7 @@ export default function product({ data }) {
 
 
                     <div className='flex-col'>
-                        <h2 className="text-4xl mb-3 mt-4">Pet Craft Supply Simple Sleeper</h2>
+                        <h2 className="text-3xl font-medium mb-3 mt-4">Pet Craft Supply Simple Sleeper</h2>
                         <span className="items-center underline flex text-gray-500 border-b text  font-bold py-1 pb-1.5"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>GET LATEST STAR RATING<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg></span>
 
                         <div className="flex items-center mb-4">
@@ -63,7 +63,7 @@ export default function product({ data }) {
                             </p>
                         </div>
 
-                        <p className="mt-4 text-gray-700">The HW-T150 is a powerful and compact soundbar that provides excellent sound quality and compatibility with multiple inputs. This soundbar features a wired subwoofer and wireless Bluetooth connectivity, allowing you to connect your devices wirelessly. It has five different modes for you to choose from, perfect for whatever type of content you’re watching or listening to. With its ultra-slim design, it’s easy to mount on your wall and use.</p>
+                        <p className="mt-4 text-gray-600">The HW-T150 is a powerful and compact soundbar that provides excellent sound quality and compatibility with multiple inputs. This soundbar features a wired subwoofer and wireless Bluetooth connectivity, allowing you to connect your devices wirelessly. It has five different modes for you to choose from, perfect for whatever type of content you’re watching or listening to. With its ultra-slim design, it’s easy to mount on your wall and use.</p>
 
                         <div className="mt-6 flex gap-3 border-b border-gray-200 pb-6 pt-0">
                             <a href="#"
@@ -394,7 +394,7 @@ export default function product({ data }) {
 
 
                 <div className="container py-8 mx-auto">
-                    <h2 className="text-4xl  text-gray-800  mb-6">Related products</h2>
+                    <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">Related products</h2>
                     <div className="grid grid-cols-6 gap-3">
 
 
@@ -463,7 +463,7 @@ export default function product({ data }) {
                         <div className="bg-white shadow rounded overflow-hidden group">
                             <div className="relative">
                                 <div className='h-40 flex p-2'>
-                                    <img src="https://m.media-amazon.com/images/I/61KCxlOlWsL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
+                                    <img src="https://m.media-amazon.com/images/I/61KCxlOlWsL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto border" />
                                 </div>
                                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
             justify-center gap-2 opacity-0 group-hover:opacity-100 transition">

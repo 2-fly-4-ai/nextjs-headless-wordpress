@@ -22,8 +22,14 @@ module.exports = {
         '600px': '37.5rem',
       },
       minHeight: {
-        'almost-screen': 'calc(-22rem + 100vh)',
+        'almost-screen': 'calc(-19.5rem + 100vh)',
         '42px': '2.625rem',
+
+      },
+      maxHeight: {
+        'almost-screen': '82vh',
+        '42px': '2.625rem',
+
       },
       boxShadow: {
         'box-shadow-custom': 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
@@ -36,5 +42,6 @@ module.exports = {
     require('precss'),
     require('autoprefixer'),
     require('@tailwindcss/typography'),
+    require("flowbite/plugin")
   ],
 };
