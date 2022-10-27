@@ -48,7 +48,7 @@ Layout.propTypes = {
 
     data: PropTypes.object,
     isPost: PropTypes.bool,
-    children: PropTypes.object
+    children: PropTypes.node
 };
 
 Layout.defaultProps = {

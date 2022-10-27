@@ -13,21 +13,6 @@ export const GET_POST = gql`
 	    content
 	    slug
 	    uri
-		productBrands {
-			nodes {
-				name
-				slug
-				uri
-			}
-			}
-			productTags {
-				nodes {
-				  name
-				  slug
-				  uri
-				  taxonomyName
-				}
-			}
 		single_product_acf {
 			asin
 			brand
@@ -46,7 +31,6 @@ export const GET_POST = gql`
 			keywordTerm
 			fieldGroupName
 		  }
-		  
 
 	    seo {
           ...SeoFragment
