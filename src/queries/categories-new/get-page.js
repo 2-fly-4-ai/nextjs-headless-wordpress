@@ -6,17 +6,42 @@ import SeoFragment from "../fragments/seo";
 export const GET_PAGE = gql`
 query GET_PAGE($uri: [String]) {
 	${HeaderFooter}
-	  page: productTaxonomies(where: {slug: $uri}) {
-    nodes {
-      name
-      products(where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAXONOMY}}}) {
-        nodes {
-          title
-        }
-      }
-    }
+	page: productTaxonomies(where: {slug: $uri}) {
+	  nodes {
+		name
+		slug
+		uri
+		products(where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAXONOMY}}}) {
+		  nodes {
+			title
+		  }
+		}
+		roundupFields {
+		  faqs
+		  howWeChose
+		  intro
+		  typesOf
+		  whatToConsider
+		  author
+		}
+		children {
+		  nodes {
+			name
+			products {
+			  nodes {
+				slug
+				title
+				single_product_acf {
+				  asin
+				  brand
+				}
+			  }
+			}
+		  }
+		}
+	  }
+	}
   }
-}
 ${MenuFragment}
 
 `;

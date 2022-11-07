@@ -561,11 +561,13 @@ export default Page;
 
 export async function getStaticProps({ params }) {
 	const { data, errors } = await client.query({
+		
 		query: GET_PAGE,
 		variables: {
 			uri: params?.slug.join('/'),
 		},
 	});
+	console.warn("PARAMS",{params})
 	console.warn("XXXXXXXXXXXXXXXXXXXXX", params?.slug.join('/'))
 
 	const defaultProps = {
@@ -609,15 +611,15 @@ export async function getStaticPaths() {
 
 	data?.pages?.nodes && data?.pages?.nodes.map(page => {
 		if (!isEmpty(page?.uri) && !isCustomPageUri(page?.uri)) {
-			const slugs = page?.uri?.split('/').slice(-2, -1).filter(pageSlug => pageSlug);
-			console.warn("SLUGS", slugs)
-
+			const slugs = page?.uri?.split('/').filter(pageSlug => pageSlug);
 			pathsData.push({ params: { slug: slugs } });
 		}
 	});
 
+	console.warn("pathsData",pathsData)
 	return {
 		paths: pathsData,
 		fallback: FALLBACK
 	};
 }
+

@@ -9,6 +9,8 @@ query GET_PAGE($uri: [String]) {
 	  page: productTags(where: {slug: $uri}) {
     nodes {
       name
+	  slug
+	  uri
       products(where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAG}}}) {
         nodes {
           title

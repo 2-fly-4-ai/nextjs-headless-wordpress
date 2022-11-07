@@ -197,7 +197,7 @@ export async function getStaticProps({ params }) {
  *
  * @returns {Promise<{paths: [], fallback: boolean}>}
  */
-export async function getStaticPaths() {
+ export async function getStaticPaths() {
 	const { data } = await client.query({
 		query: GET_PAGES_URI
 	});
@@ -206,13 +206,10 @@ export async function getStaticPaths() {
 
 	data?.pages?.nodes && data?.pages?.nodes.map(page => {
 		if (!isEmpty(page?.uri) && !isCustomPageUri(page?.uri)) {
-			const slugs = page?.uri?.split('/').slice(-2, -1).filter(pageSlug => pageSlug);
-			console.warn("SLUGS", slugs)
-
+			const slugs = page?.uri?.split('/').filter(pageSlug => pageSlug);
 			pathsData.push({ params: { slug: slugs } });
 		}
 	});
-
 	return {
 		paths: pathsData,
 		fallback: FALLBACK

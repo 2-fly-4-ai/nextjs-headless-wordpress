@@ -20,7 +20,14 @@ const Page = ({ data }) => {
 	return (
 		<Layout data={data}>
 			<section className="bg-white dark:bg-gray-900">
-				<div className='h-4 border-b'>
+				<div className='h-4 border-b flex'>
+					<div>
+						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Original_Adidas_logo.svg/2077px-Original_Adidas_logo.svg.png"/>
+
+					</div>
+					<div>
+						
+					</div>
 
 
 
@@ -197,7 +204,7 @@ export async function getStaticProps({ params }) {
  *
  * @returns {Promise<{paths: [], fallback: boolean}>}
  */
-export async function getStaticPaths() {
+ export async function getStaticPaths() {
 	const { data } = await client.query({
 		query: GET_PAGES_URI
 	});
@@ -206,13 +213,10 @@ export async function getStaticPaths() {
 
 	data?.pages?.nodes && data?.pages?.nodes.map(page => {
 		if (!isEmpty(page?.uri) && !isCustomPageUri(page?.uri)) {
-			const slugs = page?.uri?.split('/').slice(-2, -1).filter(pageSlug => pageSlug);
-			console.warn("SLUGS", slugs)
-
+			const slugs = page?.uri?.split('/').filter(pageSlug => pageSlug);
 			pathsData.push({ params: { slug: slugs } });
 		}
 	});
-
 	return {
 		paths: pathsData,
 		fallback: FALLBACK
