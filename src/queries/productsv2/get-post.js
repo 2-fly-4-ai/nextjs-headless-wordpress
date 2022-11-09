@@ -28,6 +28,40 @@ export const GET_POST = gql`
 				  taxonomyName
 				}
 			}
+			productTaxonomies {
+				nodes {
+				  uri
+				  name
+				  taxonomyName
+				  parent {
+					node {
+					  name
+					  link
+					  parent {
+						node {
+						  name
+						  link
+						  parent {
+							node {
+							  name
+							  link
+							  parent {
+								node {
+								  name
+								  link
+								}
+							  }
+							}
+						  }
+						}
+					  }
+					}
+				  }
+				  
+				}
+			  }
+
+
 		single_product_acf {
 			asin
 			brand
@@ -45,17 +79,21 @@ export const GET_POST = gql`
 			modelNumber
 			keywordTerm
 			fieldGroupName
+			shortDescription
+			productSpecs
+			productUrl
 		  }
 		  
 
 	    seo {
           ...SeoFragment
       }
-      featuredImage {
+      
+	  featuredImage {
         node {
         ...ImageFragment
         }
-		  }
+		}
 		  
 	  }
 	}

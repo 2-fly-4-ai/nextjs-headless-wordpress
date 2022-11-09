@@ -1,5 +1,5 @@
+import { isEmpty, isArray } from 'lodash';
 import client from '../../../src/apollo/client';
-import { isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
 import Layout from '../../../src/components/layout';
 import { FALLBACK, handleRedirectsAndReturnData } from '../../../src/utils/slug';
@@ -8,10 +8,19 @@ import { GET_POST_SLUGS } from '../../../src/queries/productsv2/get-posts';
 import { sanitize } from '../../../src/utils/miscellaneous';
 import { Tabs } from 'flowbite-react';
 import { Table } from 'flowbite-react';
+import Link from 'next/link';
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import * as React from "react";
+
+
 
 const Post = ({ data }) => {
 	const router = useRouter();
-	console.warn({ data })
+	const [open, setOpen] = React.useState(false);
+	var slides_list = []
+	
+	
 
 	// If the page is not yet generated, this will be displayed
 	// initially until getStaticProps() finishes running
@@ -31,17 +40,59 @@ const Post = ({ data }) => {
 							<span className="text-sm text-gray-400">
 								<i className="fa-solid fa-chevron-right"></i>
 							</span>
-							<p className="text-gray-600 font-medium">Home / Shop / electronics / audio / audio players & recorders / home theater systems / 2.1CH Sound Bar with Subwoofer, 5EQ Modes</p>
+
+							<p className="text-gray-600 font-medium">{data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.name} {">"} {data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.name} {">"} {data?.post?.productTaxonomies?.nodes[0]?.name}</p>
 						</div>
-						<img src="https://m.media-amazon.com/images/I/91ohn1BKStL._AC_SL1500_.jpg   " alt="product" className="w-full" />
+						<img src={data?.post?.single_product_acf?.productImageMainUrl} alt="product" className="w-full" />
+
+
 						<div className="grid grid-cols-5 gap-4 mt-4">
-							<img src="https://m.media-amazon.com/images/I/91ty9-ptnWL._AC_SL1500_.jpg" alt="product2"
+						{data?.post?.single_product_acf?.productImageGalleryUrls.split(", ").slice(0,5).map((imageUrl )=> {
+								
+								return <img onClick={() => {setOpen(true)}}  key={imageUrl} src={imageUrl}  alt="product2" className="w-full cursor-pointer border"/>
+
+
+								{console.warn(<img key={imageUrl} src={imageUrl}  alt="product2" className="w-full cursor-pointer border"/>)}
+								
+							}
+						)}
+
+{/* <button type="button" onClick={() => console.warn(key) setOpen(true)}>
+        Open Lightbox
+      </button> */}
+
+	
+	  {data?.post?.single_product_acf?.productImageGalleryUrls.split(", ").map(imageUrl => {
+		slides_list.push({ src: imageUrl })
+		})}
+
+	{/* {slides_list.push({ src: data?.post?.single_product_acf?.productImageMainUrl })} */}
+	{console.warn(slides_list)}
+
+      <Lightbox
+        open={open}
+        close={() => setOpen(false)}
+        slides={slides_list}
+		index={0}
+
+		
+      />
+
+	  
+							
+
+					
+
+
+							{/* <img src="https://m.media-amazon.com/images/I/91ty9-ptnWL._AC_SL1500_.jpg" alt="product2"
 								className="w-full cursor-pointer border border-primary" />
 							<img src="https://m.media-amazon.com/images/I/81vnRwJ7ltL._AC_SL1500_.jpg" alt="product2" className="w-full cursor-pointer border" />
 							<img src="https://m.media-amazon.com/images/I/A1GU0CNOAPL._AC_SL1500_.jpg" alt="product2" className="w-full cursor-pointer border" />
 							<img src="https://m.media-amazon.com/images/I/71aCyqF5TtL._AC_SL1500_.jpg" alt="product2" className="w-full cursor-pointer border" />
-							<img src="https://m.media-amazon.com/images/I/71aCyqF5TtL._AC_SL1500_.jpg" alt="product2" className="w-full cursor-pointer border" />
+							<img src="https://m.media-amazon.com/images/I/71aCyqF5TtL._AC_SL1500_.jpg" alt="product2" className="w-full cursor-pointer border" /> */}
 						</div>
+
+
 					</div>
 
 
@@ -59,13 +110,13 @@ const Post = ({ data }) => {
 							</div>
 						</div>
 						<div className="space-y-2">
-							<p className="text-gray-800 font-semibold space-x-2">
+							{/* <p className="text-gray-800 font-semibold space-x-2">
 								<span>Availability: </span>
 								<span className="text-green-600">In Stock</span>
-							</p>
+							</p> */}
 							<p className="space-x-2">
 								<span className="text-gray-800 font-semibold">Brand: </span>
-								<span className="text-gray-600 border border-gray-500 rounded-full px-4  py-0.5 pb-1">Apex</span>
+								<a href={data?.post?.productBrands?.nodes[0]?.uri} className="text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5">{data?.post?.productBrands?.nodes[0]?.name}</a>
 							</p>
 
 							<p className="space-x-2">
@@ -74,10 +125,14 @@ const Post = ({ data }) => {
 							</p>
 						</div>
 
-						<p className="mt-4 text-gray-700">The HW-T150 is a powerful and compact soundbar that provides excellent sound quality and compatibility with multiple inputs. This soundbar features a wired subwoofer and wireless Bluetooth connectivity, allowing you to connect your devices wirelessly. It has five different modes for you to choose from, perfect for whatever type of content you’re watching or listening to. With its ultra-slim design, it’s easy to mount on your wall and use.</p>
+						{/* PRODUCT DESCRIPTION*/}
+						
+						<div className="mt-4 text-gray-700 prose" dangerouslySetInnerHTML={{ __html: sanitize(data?.post?.single_product_acf?.shortDescription ?? {}) }} />
+
+
 
 						<div className="mt-6 flex gap-3 border-b border-gray-200 pb-6 pt-0">
-							<a href="#"
+							<a href={data?.post?.single_product_acf?.productUrl}
 								className="border border-gray-500 bg-green-400 text-gray-600 px-8 py-2 font-medium rounded-full uppercase flex items-center gap-2 hover:text-primary transition">
 								<i className="fa-solid fa-heart"></i> View On Amazon
 							</a>
@@ -87,25 +142,57 @@ const Post = ({ data }) => {
 							</a>
 						</div>
 
-						<p className="space-x-2 mt-5">
+						<div className="space-x-2 mt-5 flex">
 							<span className="text-gray-800 font-semibold">Tags: </span>
-							<span className="text-gray-600 border border-gray-500 rounded-full px-4  py-0.5 pb-1">Apex</span>
-						</p>
-						<p className="space-x-2 mt-5">
-							<span className="text-gray-800 font-semibold">Category: </span>
-							<span className="text-gray-600 border border-gray-500 rounded-full px-4  py-0.5 pb-1">Apex</span>
-						</p>
-						<p className="space-x-2 mt-5">
-							Category: home theater systems
 
-						</p>
+							
+					
+							
+							{!isEmpty(data?.post?.productTags?.nodes) && isArray(data?.post?.productTags?.nodes) ? (
+								<div>
+								<ul className='flex gap-2'>
+									{data?.post?.productTags?.nodes.map(tag => (
+										<li key={tag.name} className="text-gray-500 dark:text-gray-400">
+											<Link href={tag.uri}>
+												<a className="text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5" dangerouslySetInnerHTML={{ __html: sanitize(tag?.name ?? {}) }} />
+											</Link>
+										</li>
+									))
+									}
+								</ul>
+								</div>
+								
+							) : null}
+
+					
+							
+						</div>
+
+						<div className="space-x-2 mt-5 flex mb-5">
+							<span className="text-gray-800 font-semibold">Categories: </span>
+							{!isEmpty(data?.post?.productTaxonomies?.nodes) && isArray(data?.post?.productTaxonomies?.nodes) ? (
+								<div>
+								<ul className='flex gap-2'>
+									{data?.post?.productTaxonomies?.nodes.map(category => (
+										<li key={category.name} className="text-gray-500 dark:text-gray-400">
+											<Link href={category.uri} key={category.name+1}>
+												<a className="text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5" dangerouslySetInnerHTML={{ __html: sanitize(category?.name ?? {}) }} />
+											</Link>
+										</li>
+									))
+									}
+								</ul>
+								</div>
+							) : null}
+						</div>
+						
 
 						<div className="font-thin text-sm">
 							SERP AI is reader-supported, and a participant in the Amazon Associate program. When you buy through links on our site, we may earn an affiliate commission. Read more about our policy.
 						</div>
 					</div>
 				</div>
-
+				{/* {console.warn(data?.post?.single_product_acf?.productFeatures)} */}
 				{/* PUT THE TABS SECTION HERE */}
 
 				{/* Product details section */}
@@ -118,27 +205,12 @@ const Post = ({ data }) => {
 							active={true}
 							title="Features"
 						>
-							<ul className='list-disc'>
-								<li>The Pieviev Cat Litter Mat is made of durable EVA material that is nontoxic and free of phthalates.</li>
-								<li>It has a unique honeycomb design that allows for effective litter trapping.</li>
-								<li>The mat is also waterproof and can be washed by simply running it under warm water.</li>
-								<li>Finally, the mat comes in multiple colors.</li>
-							</ul>
+							<div className="mt-4 text-gray-700 prose" dangerouslySetInnerHTML={{ __html: sanitize(data?.post?.single_product_acf?.productFeatures ?? {}) }} />
+							
 						</Tabs.Item>
 						<Tabs.Item title="Pro's & con's">
-							<h3 className='text-xl'>Pro's:</h3>
-							<ul className='list-disc list-inside'>
-								<li>Nice to sit in for cat.</li>
-								<li>Cat feels sexy and majestic in it's box.</li>
-								<li>No more sharing your bed with your smelly cat.</li>
-								<li>Comes In different sized</li>
-							</ul>
-							<h3 className='text-xl mt-5'>Con's:</h3>
-							<ul className='list-disc list-inside'>
-								<li>To expensive.</li>
-								<li>Difficult to clean properly.</li>
-
-							</ul>
+						<div className="mt-4 text-gray-700 prose" dangerouslySetInnerHTML={{ __html: sanitize(data?.post?.single_product_acf?.productProsCons ?? {}) }} />
+							
 						</Tabs.Item>
 						<Tabs.Item title="Expert Opinion">
 							<div className='max-w-2xl'>
@@ -148,95 +220,7 @@ const Post = ({ data }) => {
 						</Tabs.Item>
 						<Tabs.Item title="Specifications">
 							<div className='max-w-2xl'>
-								<Table hoverable={true}>
-									<Table.Head>
-										<Table.HeadCell>
-											Product name
-										</Table.HeadCell>
-										<Table.HeadCell>
-											Color
-										</Table.HeadCell>
-										<Table.HeadCell>
-											Category
-										</Table.HeadCell>
-										<Table.HeadCell>
-											Price
-										</Table.HeadCell>
-										<Table.HeadCell>
-											<span className="sr-only">
-												Edit
-											</span>
-										</Table.HeadCell>
-									</Table.Head>
-									<Table.Body className="divide-y">
-										<Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-											<Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-												Apple MacBook Pro 17"
-											</Table.Cell>
-											<Table.Cell>
-												Sliver
-											</Table.Cell>
-											<Table.Cell>
-												Laptop
-											</Table.Cell>
-											<Table.Cell>
-												$2999
-											</Table.Cell>
-											<Table.Cell>
-												<a
-													href="/tables"
-													className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-												>
-													Edit
-												</a>
-											</Table.Cell>
-										</Table.Row>
-										<Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-											<Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-												Microsoft Surface Pro
-											</Table.Cell>
-											<Table.Cell>
-												White
-											</Table.Cell>
-											<Table.Cell>
-												Laptop PC
-											</Table.Cell>
-											<Table.Cell>
-												$1999
-											</Table.Cell>
-											<Table.Cell>
-												<a
-													href="/tables"
-													className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-												>
-													Edit
-												</a>
-											</Table.Cell>
-										</Table.Row>
-										<Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-											<Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-												Magic Mouse 2
-											</Table.Cell>
-											<Table.Cell>
-												Black
-											</Table.Cell>
-											<Table.Cell>
-												Accessories
-											</Table.Cell>
-											<Table.Cell>
-												$99
-											</Table.Cell>
-											<Table.Cell>
-												<a
-													href="/tables"
-													className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-												>
-													Edit
-												</a>
-											</Table.Cell>
-										</Table.Row>
-									</Table.Body>
-								</Table>
+										<div className="mt-4 text-gray-700 prose " dangerouslySetInnerHTML={{ __html: sanitize(data?.post?.single_product_acf?.productSpecs ?? {}) }} />
 							</div>
 
 						</Tabs.Item>
