@@ -31,6 +31,16 @@ module.exports = {
         '42px': '2.625rem',
 
       },
+
+      // insetCenter: {
+      //   'position': 'absolute',
+      //   'top': '50%',
+      //   'left': '50%',
+      //   'transform': 'translate(-50%, -50%)',
+      // },
+
+
+
       boxShadow: {
         'box-shadow-custom': 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
       },

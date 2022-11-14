@@ -11,19 +11,62 @@ query GET_PAGE($uri: [String]) {
 		name
 		slug
 		uri
-		products(where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAXONOMY}}}) {
+		parent {
+			node {
+			  name
+			  uri
+			  parent {
+				node {
+				  name
+				  uri
+				}
+			}
+			}
+		}
+		children {
+			nodes {
+			  name
+			}
+		}
+		
+		products(first: 85 where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAXONOMY}}}) {
 		  nodes {
 			title
+			uri
+			single_product_acf {
+				asin
+				brand
+				productAida
+				
+				productImageMainUrl
+				upc
+				modelNumber
+				keywordTerm
+				fieldGroupName
+				
+				
+				productUrl
+			  }
+			  productTags {
+				nodes {
+				  name
+				  uri
+				}
+			  }
+			  productBrands {
+				nodes {
+				  uri
+				  name
+				  brand_fields {
+					searchVolume
+				  }
+				}
+			  }
 		  }
 		}
-		roundupFields {
-		  faqs
-		  howWeChose
-		  intro
-		  typesOf
-		  whatToConsider
-		  author
-		}
+		
+		
+		
 		children {
 		  nodes {
 			name
@@ -35,6 +78,14 @@ query GET_PAGE($uri: [String]) {
 				  asin
 				  brand
 				}
+				productTags {
+					nodes {
+					  name
+					  uri
+					}
+				  }
+				 
+				
 			  }
 			}
 		  }

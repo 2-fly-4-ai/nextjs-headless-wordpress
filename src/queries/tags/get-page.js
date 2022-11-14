@@ -17,6 +17,7 @@ query GET_PAGE($uri: [String]) {
         }
       }
 	  roundupFields {
+		hero
         faqs
         howWeChose
         intro

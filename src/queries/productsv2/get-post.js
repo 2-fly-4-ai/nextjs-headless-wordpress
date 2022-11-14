@@ -23,9 +23,36 @@ export const GET_POST = gql`
 			productTags {
 				nodes {
 				  name
+				  products {
+					nodes{
+						title
+						single_product_acf {
+							asin
+							brand
+							productAida
+							productDescription
+							productFeatures
+							productImageGalleryUrls
+							productImageMainUrl
+							productProsCons
+							productRating
+							upc
+							productReviewsQuantity
+							productReviewShort
+							productReviewLong
+							modelNumber
+							keywordTerm
+							fieldGroupName
+							shortDescription
+							productSpecs
+							productUrl
+						  }
+					  }
+				  }
 				  slug
 				  uri
 				  taxonomyName
+				  
 				}
 			}
 			productTaxonomies {

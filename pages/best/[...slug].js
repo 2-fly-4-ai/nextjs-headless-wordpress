@@ -27,13 +27,13 @@ const Page = ({ data }) => {
 					<article className="xl:w-[828px] w-full max-w-none format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
 						<header className="py-12">
 							<div className="px-4 mx-auto w-full max-w-screen-xl text-center">
-								<span className="block mb-4 font-semibold text-gray-900 dark:text-white">Published <time className="font-normal text-gray-500 dark:text-gray-400" className="uppercase" dateTime="2022-03-08" title="August 3rd, 2022">August 3, 2022, 2:20am EDT</time></span>
-								<h1 className="mx-auto mb-4 max-w-2xl text-2xl dark:text-white font-extrabold leading-none text-gray-900 sm:text-3xl lg:text-4xl">Flowbite Blocks Tutorial - Learn how to get started with custom sections using the Flowbite Blocks</h1>
+								<span className="block mb-4 font-semibold text-gray-900 dark:text-white">Published <time className="uppercase font-normal text-gray-500 dark:text-gray-400" dateTime="2022-03-08" title="August 3rd, 2022">August 3, 2022, 2:20am EDT</time></span>
+								<h2><div className="mx-auto mb-4 max-w-2xl text-2xl dark:text-white font-extrabold leading-none text-gray-900 sm:text-3xl lg:text-4xl" dangerouslySetInnerHTML={{ __html: sanitize(data?.page?.nodes[0]?.roundupFields?.hero ?? {}) }}/></h2>
 								<p className="text-lg font-normal text-gray-500 dark:text-gray-400">Before going digital, you might scribbling down some ideas in a sketchbook.</p>
 							</div>
 						</header>
 						<div className="flex flex-col lg:flex-row justify-between lg:items-center py-6 border-t border-b border-gray-200 dark:border-gray-700">
-							<span className="text-base mb-4 lg:mb-0 font-normal text-gray-500 dark:text-gray-400">By <a href="#" rel="author" className="font-bold text-gray-900 dark:text-white no-underline hover:underline">Jese Leos</a> in <a href="#" className="font-normal text-gray-500 dark:text-gray-400 no-underline hover:underline">World News</a></span>
+							<span className="text-base mb-4 lg:mb-0 font-normal text-gray-500 dark:text-gray-400"><h1 className='uppercase font-bold text-xl'>The best {data?.page?.nodes[0]?.name}</h1> By <a href="#" rel="author" className="font-bold text-gray-900 dark:text-white no-underline hover:underline">Jese Leos</a> in <a href="#" className="font-normal text-gray-500 dark:text-gray-400 no-underline hover:underline">World News</a></span>
 							<aside aria-label="Share social media">
 								<a href="#"
 									className="inline-flex items-center py-2 px-6 mr-2 text-xs font-medium text-gray-900 no-underline bg-white rounded-lg border border-gray-200 focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"><svg
@@ -59,7 +59,7 @@ const Page = ({ data }) => {
 									</svg> Copy link</button>
 							</aside>
 						</div>
-						<div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: sanitize(data?.post?.content ?? {}) }} />
+						<div className="prose prose-lg max-w-none py-8" dangerouslySetInnerHTML={{ __html: sanitize(data?.page?.nodes[0]?.roundupFields?.intro ?? {}) }} />
 						<div className="flex justify-between items-center py-6 border-t border-b border-gray-200 dark:border-gray-700">
 							<aside aria-label="Share social media">
 								<a href="#"
@@ -561,13 +561,13 @@ export default Page;
 
 export async function getStaticProps({ params }) {
 	const { data, errors } = await client.query({
-		
+
 		query: GET_PAGE,
 		variables: {
 			uri: params?.slug.join('/'),
 		},
 	});
-	console.warn("PARAMS",{params})
+	console.warn("PARAMS", { params })
 	console.warn("XXXXXXXXXXXXXXXXXXXXX", params?.slug.join('/'))
 
 	const defaultProps = {
@@ -616,7 +616,7 @@ export async function getStaticPaths() {
 		}
 	});
 
-	console.warn("pathsData",pathsData)
+	console.warn("pathsData", pathsData)
 	return {
 		paths: pathsData,
 		fallback: FALLBACK

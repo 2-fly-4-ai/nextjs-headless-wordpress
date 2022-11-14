@@ -12,15 +12,40 @@ import Link from 'next/link';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import * as React from "react";
-
+import { useState } from 'react';
 
 
 const Post = ({ data }) => {
 	const router = useRouter();
 	const [open, setOpen] = React.useState(false);
-	var slides_list = []
-	
-	
+	const [activeId, setActiveId] = useState()
+	let slides_list = []
+	let related_products = []
+	console.warn({ data })
+
+
+	function activeCategory(id) {
+		setActiveId(id)
+	}
+
+	function isActive(id) {
+		return id === activeId;
+	}
+
+	data?.post?.productTags?.nodes.map((test) => {
+		related_products.push(test?.products?.nodes)
+	})
+
+
+	related_products = related_products.flat(Infinity)
+	const uniqueNames = related_products.filter((v, i, a) => a.findIndex(t => (JSON.stringify(t) === JSON.stringify(v))) === i).slice(0, 12)
+	console.warn(uniqueNames)
+
+	{ console.warn("LOOK HERE", uniqueNames) }
+
+
+
+
 
 	// If the page is not yet generated, this will be displayed
 	// initially until getStaticProps() finishes running
@@ -30,8 +55,13 @@ const Post = ({ data }) => {
 
 	return (
 		<Layout data={data} isPost>
+			{/* The whole page */}
 			<div className="px-6 py-4 flex-col">
-				<div className="container grid grid-cols-2 gap-6 mx-auto">
+
+				{/* Top-box-Whole */}
+				<div className="container grid grid-cols-2 gap-10 mx-auto">
+
+					{/* Top-box-left */}
 					<div>
 						<div className="container py-4 flex items-center gap-3">
 							<a href="" className="text-primary text-base">
@@ -41,61 +71,46 @@ const Post = ({ data }) => {
 								<i className="fa-solid fa-chevron-right"></i>
 							</span>
 
-							<p className="text-gray-600 font-medium">{data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.name} {">"} {data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.name} {">"} {data?.post?.productTaxonomies?.nodes[0]?.name}</p>
+							<p className="text-gray-600 font-medium">
+								<a href={data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.link}>{data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.name}</a>
+								{" > "}
+								<a href={data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.link}>{data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.name}</a>
+								{" > "}
+								<a href={data?.post?.productTaxonomies?.nodes[0]?.uri}>{data?.post?.productTaxonomies?.nodes[0]?.name}</a>
+							</p>
 						</div>
-						<img src={data?.post?.single_product_acf?.productImageMainUrl} alt="product" className="w-full" />
+						{console.warn("FUCK", data?.post?.productTaxonomies)}
 
-
+						<img src={data?.post?.single_product_acf?.productImageMainUrl} alt="product" className="max-h-96" />
 						<div className="grid grid-cols-5 gap-4 mt-4">
-						{data?.post?.single_product_acf?.productImageGalleryUrls.split(", ").slice(0,5).map((imageUrl )=> {
-								
-								return <img onClick={() => {setOpen(true)}}  key={imageUrl} src={imageUrl}  alt="product2" className="w-full cursor-pointer border"/>
+							{data?.post?.single_product_acf?.productImageGalleryUrls.split(", ").slice(0, 5).map((imageUrl, index) => {
+								return <img onClick={() => { setOpen(true); activeCategory(index) }} key={imageUrl} src={imageUrl} alt="product2" className={isActive(index) ? "..." : ""} />
 
-
-								{console.warn(<img key={imageUrl} src={imageUrl}  alt="product2" className="w-full cursor-pointer border"/>)}
-								
 							}
-						)}
+							)}
 
-{/* <button type="button" onClick={() => console.warn(key) setOpen(true)}>
+							{/* <button type="button" onClick={() => console.warn(key) setOpen(true)}>
         Open Lightbox
       </button> */}
 
-	
-	  {data?.post?.single_product_acf?.productImageGalleryUrls.split(", ").map(imageUrl => {
-		slides_list.push({ src: imageUrl })
-		})}
+							{data?.post?.single_product_acf?.productImageGalleryUrls.split(", ").map(imageUrl => {
+								slides_list.push({ src: imageUrl })
+							})}
 
-	{/* {slides_list.push({ src: data?.post?.single_product_acf?.productImageMainUrl })} */}
-	{console.warn(slides_list)}
-
-      <Lightbox
-        open={open}
-        close={() => setOpen(false)}
-        slides={slides_list}
-		index={0}
-
-		
-      />
-
-	  
-							
-
-					
+							{/* {slides_list.push({ src: data?.post?.single_product_acf?.productImageMainUrl })} */}
 
 
-							{/* <img src="https://m.media-amazon.com/images/I/91ty9-ptnWL._AC_SL1500_.jpg" alt="product2"
-								className="w-full cursor-pointer border border-primary" />
-							<img src="https://m.media-amazon.com/images/I/81vnRwJ7ltL._AC_SL1500_.jpg" alt="product2" className="w-full cursor-pointer border" />
-							<img src="https://m.media-amazon.com/images/I/A1GU0CNOAPL._AC_SL1500_.jpg" alt="product2" className="w-full cursor-pointer border" />
-							<img src="https://m.media-amazon.com/images/I/71aCyqF5TtL._AC_SL1500_.jpg" alt="product2" className="w-full cursor-pointer border" />
-							<img src="https://m.media-amazon.com/images/I/71aCyqF5TtL._AC_SL1500_.jpg" alt="product2" className="w-full cursor-pointer border" /> */}
+							<Lightbox
+								open={open}
+								close={() => setOpen(false)}
+								slides={slides_list}
+								index={activeId}
+							/>
+
 						</div>
-
-
 					</div>
 
-
+					{/* Top-box-right */}
 					<div className='flex-col'>
 						<h2 className="text-4xl mb-3 mt-4">{data?.post?.title}</h2>
 						<span className="items-center underline flex text-gray-500 border-b text  font-bold py-1 pb-1.5"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>GET LATEST STAR RATING<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg></span>
@@ -126,7 +141,7 @@ const Post = ({ data }) => {
 						</div>
 
 						{/* PRODUCT DESCRIPTION*/}
-						
+
 						<div className="mt-4 text-gray-700 prose" dangerouslySetInnerHTML={{ __html: sanitize(data?.post?.single_product_acf?.shortDescription ?? {}) }} />
 
 
@@ -145,57 +160,55 @@ const Post = ({ data }) => {
 						<div className="space-x-2 mt-5 flex">
 							<span className="text-gray-800 font-semibold">Tags: </span>
 
-							
-					
-							
+
+
+
 							{!isEmpty(data?.post?.productTags?.nodes) && isArray(data?.post?.productTags?.nodes) ? (
 								<div>
-								<ul className='flex gap-2'>
-									{data?.post?.productTags?.nodes.map(tag => (
-										<li key={tag.name} className="text-gray-500 dark:text-gray-400">
-											<Link href={tag.uri}>
-												<a className="text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5" dangerouslySetInnerHTML={{ __html: sanitize(tag?.name ?? {}) }} />
-											</Link>
-										</li>
-									))
-									}
-								</ul>
+									<ul className='flex flex-wrap gap-2'>
+										{data?.post?.productTags?.nodes.map(tag => (
+											<li key={tag.name} className="text-gray-500 dark:text-gray-400 mb-3">
+												<Link href={tag.uri}>
+													<a className="text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5" dangerouslySetInnerHTML={{ __html: sanitize(tag?.name ?? {}) }} />
+												</Link>
+											</li>
+										))
+										}
+									</ul>
 								</div>
-								
+
 							) : null}
 
-					
-							
+
+
 						</div>
 
 						<div className="space-x-2 mt-5 flex mb-5">
 							<span className="text-gray-800 font-semibold">Categories: </span>
 							{!isEmpty(data?.post?.productTaxonomies?.nodes) && isArray(data?.post?.productTaxonomies?.nodes) ? (
 								<div>
-								<ul className='flex gap-2'>
-									{data?.post?.productTaxonomies?.nodes.map(category => (
-										<li key={category.name} className="text-gray-500 dark:text-gray-400">
-											<Link href={category.uri} key={category.name+1}>
-												<a className="text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5" dangerouslySetInnerHTML={{ __html: sanitize(category?.name ?? {}) }} />
-											</Link>
-										</li>
-									))
-									}
-								</ul>
+									<ul className='flex gap-2'>
+										{data?.post?.productTaxonomies?.nodes.map(category => (
+											<li key={category.name} className="text-gray-500 dark:text-gray-400">
+												<Link href={category.uri} key={category.name + 1}>
+													<a className="text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5" dangerouslySetInnerHTML={{ __html: sanitize(category?.name ?? {}) }} />
+												</Link>
+											</li>
+										))
+										}
+									</ul>
 								</div>
 							) : null}
 						</div>
-						
+
 
 						<div className="font-thin text-sm">
 							SERP AI is reader-supported, and a participant in the Amazon Associate program. When you buy through links on our site, we may earn an affiliate commission. Read more about our policy.
 						</div>
 					</div>
 				</div>
-				{/* {console.warn(data?.post?.single_product_acf?.productFeatures)} */}
-				{/* PUT THE TABS SECTION HERE */}
 
-				{/* Product details section */}
+				{/*tabs-section*/}
 				<div className="container pb-16 mx-auto mt-6">
 					<Tabs.Group
 						aria-label="Default tabs"
@@ -206,11 +219,11 @@ const Post = ({ data }) => {
 							title="Features"
 						>
 							<div className="mt-4 text-gray-700 prose" dangerouslySetInnerHTML={{ __html: sanitize(data?.post?.single_product_acf?.productFeatures ?? {}) }} />
-							
+
 						</Tabs.Item>
 						<Tabs.Item title="Pro's & con's">
-						<div className="mt-4 text-gray-700 prose" dangerouslySetInnerHTML={{ __html: sanitize(data?.post?.single_product_acf?.productProsCons ?? {}) }} />
-							
+							<div className="mt-4 text-gray-700 prose" dangerouslySetInnerHTML={{ __html: sanitize(data?.post?.single_product_acf?.productProsCons ?? {}) }} />
+
 						</Tabs.Item>
 						<Tabs.Item title="Expert Opinion">
 							<div className='max-w-2xl'>
@@ -220,7 +233,7 @@ const Post = ({ data }) => {
 						</Tabs.Item>
 						<Tabs.Item title="Specifications">
 							<div className='max-w-2xl'>
-										<div className="mt-4 text-gray-700 prose " dangerouslySetInnerHTML={{ __html: sanitize(data?.post?.single_product_acf?.productSpecs ?? {}) }} />
+								<div className="mt-4 text-gray-700 prose " dangerouslySetInnerHTML={{ __html: sanitize(data?.post?.single_product_acf?.productSpecs ?? {}) }} />
 							</div>
 
 						</Tabs.Item>
@@ -233,7 +246,7 @@ const Post = ({ data }) => {
 					</Tabs.Group>
 				</div>
 
-
+				{/*comments-section*/}
 				<div className='flex mx-auto max-w-screen-2xl   flex-auto'>
 
 					{/* Left-box of Comments */}
@@ -389,363 +402,47 @@ const Post = ({ data }) => {
 
 
 				<div className="container py-8 mx-auto">
-					<h2 className="text-4xl  text-gray-800  mb-6">Related products</h2>
+					<h2 className="text-3xl  text-gray-800  mb-6">Related products</h2>
+
+
+
 					<div className="grid grid-cols-6 gap-3">
+
+
+						{uniqueNames.map((product) => {
+
+							return <div className="bg-white shadow rounded overflow-hidden group">
+								<div className="relative">
+									<div className='h-45 flex p-2 justify-center'>
+										<img src={product?.single_product_acf?.productImageMainUrl} alt="product 1" className="max-h-56  my-auto" />
+									</div>
+								</div>
+								<div className="pt-4 pb-3 px-4">
+									<a href={product?.single_product_acf?.productUrl}>
+										<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">Bed
+											{product?.title}</h4>
+									</a>
+								</div>
+							</div>
+
+							{ console.warn(<img key={imageUrl} src={imageUrl} alt="product2" className="w-full cursor-pointer border" />) }
+
+						}
+						)}
 
 
 						{/* product 1 */}
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/612zjdj27AL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">Bed
-										King Size</h4>
-								</a>
 
-
-							</div>
-						</div>
-
-						{/* product 2 */}
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/612zjdj27AL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">Bed
-										King Size</h4>
-								</a>
-
-
-							</div>
-						</div>
-
-
-						{/* product 3 */}
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/61KCxlOlWsL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">
-										Couple Sofa</h4>
-								</a>
-							</div>
-						</div>
-
-						{/* Product 4 */}
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/91ohn1BKStL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">
-										Mattrass X</h4>
-								</a>
-							</div>
-
-						</div>
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/91ohn1BKStL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">
-										Mattrass X</h4>
-								</a>
-							</div>
-
-						</div>
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/91ohn1BKStL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">
-										Mattrass X</h4>
-								</a>
-							</div>
-
-						</div>
 					</div>
 				</div>
-				<div className="container pb-8 mx-auto">
-
-					<div className="grid grid-cols-6 gap-3">
 
 
 
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/612zjdj27AL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">Bed
-										King Size</h4>
-								</a>
 
-
-							</div>
-						</div>
-
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/612zjdj27AL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">Bed
-										King Size</h4>
-								</a>
-
-
-							</div>
-						</div>
-
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/61KCxlOlWsL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">
-										Couple Sofa</h4>
-								</a>
-
-
-							</div>
-
-						</div>
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/91ohn1BKStL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">
-										Mattrass X</h4>
-								</a>
-							</div>
-
-						</div>
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/91ohn1BKStL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">
-										Mattrass X</h4>
-								</a>
-							</div>
-
-						</div>
-						<div className="bg-white shadow rounded overflow-hidden group">
-							<div className="relative">
-								<div className='h-40 flex p-2'>
-									<img src="https://m.media-amazon.com/images/I/91ohn1BKStL._AC_UL480_FMwebp_QL65_.jpg" alt="product 1" className="w-full my-auto" />
-								</div>
-								<div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-		justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="view product">
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</a>
-									<a href="#"
-										className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-										title="add to wishlist">
-										<i className="fa-solid fa-heart"></i>
-									</a>
-								</div>
-							</div>
-							<div className="pt-4 pb-3 px-4">
-								<a href="#">
-									<h4 className="mt-3 uppercase font-medium text-sm mb-2 text-gray-800 hover:text-primary transition">
-										Mattrass X</h4>
-								</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
 			</div >
 		</Layout >
-	);
-};
+	)
+}
 
 export default Post;
 
