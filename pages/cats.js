@@ -1,12 +1,13 @@
-
 import client from '../src/apollo/client';
-import { GET_PAGE } from '../src/queries/pages/get-page';
+import { GET_PAGE } from '../src/queries/top-level/get-page';
 import { useRouter } from 'next/router';
 import { FALLBACK, handleRedirectsAndReturnData, isCustomPageUri } from '../src/utils/slug';
 import { sanitize } from '../src/utils/miscellaneous';
 import Layout from '../src/components/layout';
 import { Tabs } from 'flowbite-react';
 import { useEffect } from 'react';
+import { isEmpty } from 'lodash';
+
 
 
 
@@ -26,8 +27,8 @@ export default function Home({ data }) {
             <section class="bg-white dark:bg-gray-900 xl:pt-8">
                 <div class="py-8 px-4 mx-auto max-w-screen-2xl sm:py-4 lg:px-6">
                     <div class="mx-auto max-w-screen-md text-center">
-                        <h2 class="mb-2 text-4xl tracking-tight  leading-tight text-gray-900 dark:text-white ">Dogs: The Complete Guide to Pet Care</h2>
-                        <p class="mb-6 text-gray-600 font dark:text-gray-400 md:text-xl">From training and grooming to nutrition and exercise, there's a lot that goes into caring for a dog, but it's worth it as your dog often becomes a part of the family.</p>
+                        <h2 class="mb-2 text-4xl tracking-tight  leading-tight text-gray-900 dark:text-white ">Cats: The Complete Guide to Pet Care</h2>
+                        <p class="mb-6 text-gray-600 font dark:text-gray-400 md:text-xl">From training and grooming to nutrition and exercise, there's a lot that goes into caring for a dog, but it's worth it as your cat often becomes a part of the family.</p>
                         <a href="#" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Free trial for 30 days</a>
                     </div>
                 </div>
@@ -35,12 +36,12 @@ export default function Home({ data }) {
 
             <section class="bg-white dark:bg-gray-900">
                 <div class="gap-8 items-center  px-4 mx-auto max-w-screen-2xl xl:gap-8  md:grid md:grid-cols-2  lg:px-6">
-                    <img class="w-full dark:hidden" src="https://images.unsplash.com/photo-1558929996-da64ba858215?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=873&q=80" alt="dashboard image" />
+                    <img class="w-full dark:hidden" src="https://images.unsplash.com/photo-1503844281047-cf42eade5ca5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" alt="dashboard image" />
                     <div class="mt-4 md:mt-0 ">
                         <h2 class="mb-4 text-6xl tracking-tight  text-gray-800 dark:text-white">Let's create more tools and ideas that brings us together.</h2>
                         <p class="mb-6 text-gray-600 md:text-lg dark:text-gray-400">Flowbite helps you connect with friends and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups.</p>
-                        <a href="/shop/category/dog-supplies" className="inline-flex rounded-full items-center justify-center px-5 mr-auto py-3 text-base  text-center text-gray-800 border border-2 border-gray-500  hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 font-medium">
-                            Shop For Dog Supplies
+                        <a href="#" className="inline-flex rounded-full items-center justify-center px-5 mr-auto py-3 text-base  text-center text-gray-800 border border-2 border-gray-500  hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 font-medium">
+                            Shop For Cat Supplies
                         </a>
                     </div>
                 </div>
@@ -52,7 +53,7 @@ export default function Home({ data }) {
             <section className="bg-white dark:bg-gray-900 max-w-screen-2xl mx-auto px-6 ">
                 <div className="py-8 px-0  mx-auto max-w-screen-2xl sm:py-8 lg:px-0">
                     <div className="mx-auto max-w-screen-2xl text-left">
-                        <h2 className="mb-6 text-4xl tracking-tight text-gray-800 dark:text-white">The Dog Archives</h2>
+                        <h2 className="mb-6 text-4xl tracking-tight text-gray-800 dark:text-white">The Cat Archives</h2>
                     </div>
 
                     <Tabs.Group
@@ -61,7 +62,7 @@ export default function Home({ data }) {
                     >
                         <Tabs.Item
                             active={true}
-                            title="Dog Life"
+                            title="cat Life"
                         >
                             <div className="grid gap-8 mb-16 lg:divide-x lg:divide-gray-200 dark:lg:divide-gray-700 lg:grid-cols-3">
                                 <article>
@@ -71,7 +72,7 @@ export default function Home({ data }) {
                                     <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
                                         <a href="#">Pug life</a>
                                     </h2>
-                                    <p className="mb-4  text-gray-700 dark:text-gray-400">Pugs - The Cutest Dogs Ever? We explore the gangster-like dogs that have taken over social media. These little dogs have big personalities, and an even bigger following </p>
+                                    <p className="mb-4  text-gray-700 dark:text-gray-400">Pugs - The Cutest Cats Ever? We explore the gangster-like Cats that have taken over social media. These little Cats have big personalities, and an even bigger following </p>
                                     <a href="#" className="inline-flex items-center  text-primary-600 hover:underline dark:text-primary-500">
                                         Read more
                                         <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -163,18 +164,18 @@ export default function Home({ data }) {
                                 </div>
                             </div>
                         </Tabs.Item>
-                        <Tabs.Item title="Dogs Breeds">
+                        <Tabs.Item title="Cats Breeds">
                             Dashboard content
                         </Tabs.Item>
-                        <Tabs.Item title="Dog Lifestyle & Fiteness">
+                        <Tabs.Item title="cat Lifestyle & Fiteness">
                             Settings content
                         </Tabs.Item>
-                        <Tabs.Item title="Food For Dogs & Nutritional Tips">
+                        <Tabs.Item title="Food For Cats & Nutritional Tips">
                             Contacts content
                         </Tabs.Item>
                         <Tabs.Item
                             disabled={true}
-                            title="Dog Training Tips & Guides"
+                            title="cat Training Tips & Guides"
                         >
                             Disabled content
                         </Tabs.Item>
@@ -260,302 +261,33 @@ export default function Home({ data }) {
                     <div className="mx-auto max-w-screen-2xl text-left mb-8 lg:mb-8">
                         <h2 className="mb-6 text-4xl tracking-tight text-gray-800 dark:text-white">Our Best Picks</h2>
                     </div>
+                    <div className="grid gap-6 mb-16 lg:divide-x lg:divide-gray-200 dark:lg:divide-gray-700 lg:grid-cols-3">
+                        {data?.page?.nodes.map(product => (
+
+                            <article className='px-8'>
+                                <h2 className="mb-1 text-2xl  tracking-tight text-gray-900 dark:text-white">
+                                    <a href="#" className='capitalize'>{product?.name}</a>
+                                </h2>
+                                {!isEmpty(product?.roundupFields?.hero) ? (
+                                    <div className="text-gray-600 max-w-lg w-96 text py-0.5 pb-1.5 " dangerouslySetInnerHTML={{ __html: sanitize(product?.roundupFields?.hero ?? {}) }} />
+                                ) : null}
 
 
-                    <Tabs.Group
-                        aria-label="Default tabs"
-                        style="default"
-
-                    >
-                        <Tabs.Item
-                            active={true}
-                            title="Food"
 
 
-                        >
-                            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
 
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
-
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
-
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
+                                <a href="#" className="inline-flex items-center  text-primary-600 hover:underline dark:text-primary-500">
+                                    Read more
+                                    <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+                                </a>
+                            </article>
+                        ))}
 
 
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
-
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
+                    </div>
 
 
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
 
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
-
-
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
-
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
-
-
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
-
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
-
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
-
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
-
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
-
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
-
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
-
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
-
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
-
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
-
-
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
-
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
-
-
-                                <article className=" bg-white  dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="#">
-                                        <img className="mb-2 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/blog/office-laptops-2.png" alt="office laptops" />
-                                    </a>
-
-                                    <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
-                                        <a href="#">Our first project with React</a>
-                                    </h2>
-                                    <div className="flex items-center space-x-4">
-
-                                        <div className=" dark:text-white">
-                                            <div>Sofia McGuire</div>
-                                            <div className="text-sm font-normal text-gray-800 dark:text-gray-400">Aug 15, 2021 · 16 min read</div>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-
-                            <div class="flex flex-col items-center mt-8">
-
-                                <span class="text-sm text-gray-800 dark:text-gray-400">
-                                    Showing <span class="font-semibold text-gray-900 dark:text-white">1</span> to <span class="font-semibold text-gray-900 dark:text-white">10</span> of <span class="font-semibold text-gray-900 dark:text-white">100</span> Entries
-                                </span>
-                                <div class="inline-flex mt-2 xs:mt-0">
-
-                                    <button class="inline-flex items-center py-2 px-4 text-sm  text-white bg-gray-300 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <svg aria-hidden="true" class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd"></path></svg>
-                                        Prev
-                                    </button>
-                                    <button class="inline-flex items-center py-2 px-4 text-sm  text-white bg-gray-800 rounded-r border-0 border-l border-gray-700 hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        Next
-                                        <svg aria-hidden="true" class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </Tabs.Item>
-                        <Tabs.Item title="Dashboard">
-                            Dashboard content
-                        </Tabs.Item>
-                        <Tabs.Item title="Treats">
-                            Settings content
-                        </Tabs.Item>
-                        <Tabs.Item title="Apparel & Accessories">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Beds & Furniture">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Cameras & Monitors">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Carriers & Travel Products">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Collars, Harnesses & Leashes">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Crates, Houses & Pens">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Doors, Gates & Ramps">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Feeding & Watering Supplies">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Flea & Tick Control">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Grooming">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Health Supplies">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Litter & Housebreaking">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Memorials">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Toys">
-                            Contacts content
-                        </Tabs.Item>
-                        <Tabs.Item title="Training & Behavior Aids">
-                            Contacts content
-                        </Tabs.Item>
-
-                    </Tabs.Group>
 
                 </div>
             </section>
@@ -916,7 +648,7 @@ export default function Home({ data }) {
             <section className="bg-white dark:bg-gray-900 ">
                 <div className="grid gap-16 py-8 px-6 mx-auto max-w-screen-2xl lg:grid-cols-2 lg:py-16 lg:px-6">
                     <div className="text-gray-500 sm:text-lg dark:text-gray-400">
-                        <h2 className="mb-4 text-4xl tracking-tight  text-gray-800 dark:text-white">Our Resident Dog Expert</h2>
+                        <h2 className="mb-4 text-4xl tracking-tight  text-gray-800 dark:text-white">Our Resident cat Expert</h2>
                         <p className="mb-2 md:text-lg">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value.</p>
                         <p className=" md:text-lg">I started my pet supplies company because I saw a need for quality products that were also affordable. I started by selling products out of my home and then eventually expanded to an online store. </p>
                     </div>

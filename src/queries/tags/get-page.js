@@ -11,9 +11,95 @@ query GET_PAGE($uri: [String]) {
       name
 	  slug
 	  uri
-      products(where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAG}}}) {
+	  seo {
+        title
+        canonical
+        metaDesc
+        metaRobotsNofollow
+        metaRobotsNoindex
+        breadcrumbs {
+          text
+          url
+        }
+      }
+      products(first: 30 where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAG}}}) {
         nodes {
           title
+		  uri
+			single_product_acf {
+				asin
+				brand
+				productAida
+				productDescription
+				productImageMainUrl
+				upc
+				modelNumber
+				keywordTerm
+				fieldGroupName
+				
+				
+				productUrl
+			  }
+			  productTags {
+				nodes {
+				  name
+				  uri
+				  roundupFields {
+					hero
+					roundupFeatureImage
+				  }
+				}
+			  }
+			  productBrands {
+				nodes {
+				  uri
+				  seo {
+					title
+					canonical
+					metaDesc
+					metaRobotsNofollow
+					metaRobotsNoindex
+					breadcrumbs {
+					  text
+					  url
+					}
+				  }
+
+				  name
+				  brand_fields {
+					searchVolume
+				  }
+				}
+			  }
+			  productTaxonomies {
+				nodes {
+				  uri
+				  name
+				  parent {
+					node {
+					  name
+					  uri
+					  parent {
+						node {
+						  name
+						  uri
+						  parent {
+							node {
+							  name
+							  uri
+							}
+						  }
+						}
+					  }
+					}
+				  }
+				  
+				
+				}
+			  }
+		
+			  
+		  
         }
       }
 	  roundupFields {
@@ -24,9 +110,10 @@ query GET_PAGE($uri: [String]) {
         typesOf
         whatToConsider
         author
-    }
-  }
-}
+		roundupFeatureImage
+     }
+   }
+ }
 }
 ${MenuFragment}
 

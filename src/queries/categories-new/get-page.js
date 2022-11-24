@@ -11,6 +11,17 @@ query GET_PAGE($uri: [String]) {
 		name
 		slug
 		uri
+		seo {
+			title
+			canonical
+			metaDesc
+			metaRobotsNofollow
+			metaRobotsNoindex
+			breadcrumbs {
+			  text
+			  url
+			}
+		  }
 		parent {
 			node {
 			  name
@@ -19,6 +30,23 @@ query GET_PAGE($uri: [String]) {
 				node {
 				  name
 				  uri
+				  seo {
+					title
+					canonical
+					metaDesc
+					metaRobotsNofollow
+					metaRobotsNoindex
+					breadcrumbs {
+					  text
+					  url
+					}
+				  }
+				  parent {
+				node {
+				  name
+				  uri
+				}
+			}
 				}
 			}
 			}
@@ -26,10 +54,117 @@ query GET_PAGE($uri: [String]) {
 		children {
 			nodes {
 			  name
+			  uri
+			  products(first: 5 where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAXONOMY}}}) {
+				nodes {
+				  title
+				  uri
+				  seo {
+					title
+					canonical
+					metaDesc
+					metaRobotsNofollow
+					metaRobotsNoindex
+					breadcrumbs {
+					  text
+					  url
+					}
+				  }
+				  single_product_acf {
+					  asin
+					  brand
+					  productAida
+					  productImageMainUrl
+					  upc
+					  modelNumber
+					  keywordTerm
+					  fieldGroupName
+					  productUrl
+				   }
+				   productTags {
+					nodes {
+					  name
+					  uri
+					}
+				  }
+				 
+				}
+			  }
+			  children {
+				nodes {
+				  name
+				  uri
+				  products(first: 5 where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAXONOMY}}}) {
+					nodes {
+					  title
+					  uri
+					  seo {
+						title
+						canonical
+						metaDesc
+						metaRobotsNofollow
+						metaRobotsNoindex
+						breadcrumbs {
+						  text
+						  url
+						}
+					  }
+					  single_product_acf {
+						  asin
+						  brand
+						  productAida
+						  productImageMainUrl
+						  upc
+						  modelNumber
+						  keywordTerm
+						  fieldGroupName
+						  productUrl
+					   }
+					   productTags {
+						nodes {
+						  name
+						  uri
+						}
+					  }
+					 
+					}
+				  }
+				  children {
+					nodes {
+					  name
+					  uri
+					  products(first: 10 where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAXONOMY}}}) {
+						nodes {
+						  title
+						  uri
+						  single_product_acf {
+							  asin
+							  brand
+							  productAida
+							  productImageMainUrl
+							  upc
+							  modelNumber
+							  keywordTerm
+							  fieldGroupName
+							  productUrl
+						   }
+						   productTags {
+							nodes {
+							  name
+							  uri
+							}
+						  }
+						  
+						}
+					  }
+					}
+				  }
+				}
+			  }
 			}
-		}
+		  }
 		
-		products(first: 85 where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAXONOMY}}}) {
+		products(first: 40 where: {taxQuery: {taxArray: {taxonomy: PRODUCTTAXONOMY}}}) {
 		  nodes {
 			title
 			uri
@@ -37,14 +172,11 @@ query GET_PAGE($uri: [String]) {
 				asin
 				brand
 				productAida
-				
 				productImageMainUrl
 				upc
 				modelNumber
 				keywordTerm
 				fieldGroupName
-				
-				
 				productUrl
 			  }
 			  productTags {
@@ -53,45 +185,21 @@ query GET_PAGE($uri: [String]) {
 				  uri
 				}
 			  }
-			  productBrands {
-				nodes {
-				  uri
-				  name
-				  brand_fields {
-					searchVolume
-				  }
-				}
-			  }
-		  }
-		}
-		
-		
-		
-		children {
-		  nodes {
-			name
-			products {
-			  nodes {
-				slug
-				title
-				single_product_acf {
-				  asin
-				  brand
-				}
-				productTags {
-					nodes {
-					  name
-					  uri
-					}
-				  }
-				 
-				
-			  }
-			}
+			  
 		  }
 		}
 	  }
 	}
+	productBrands(where: {orderby: COUNT}, last: 100) {
+		nodes {
+		  name
+		  uri
+		  seo {
+		
+			metaRobotsNoindex
+			
+		  }
+		}}
   }
 ${MenuFragment}
 

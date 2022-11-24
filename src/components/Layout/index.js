@@ -7,6 +7,7 @@ import { sanitize } from '../../utils/miscellaneous';
 import PropTypes from 'prop-types';
 
 const Layout = ({ data, isPost, children }) => {
+    console.warn(data)
     const { page, post, posts, header, footer, headerMenus, footerMenus, footerMenus1, footerMenus2, footerMenus3 } = data || {};
 
 

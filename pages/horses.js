@@ -26,7 +26,7 @@ export default function Home({ data }) {
             <section class="bg-white dark:bg-gray-900 xl:pt-8">
                 <div class="py-8 px-4 mx-auto max-w-screen-2xl sm:py-4 lg:px-6">
                     <div class="mx-auto max-w-screen-md text-center">
-                        <h2 class="mb-2 text-4xl tracking-tight  leading-tight text-gray-900 dark:text-white ">Dogs: The Complete Guide to Pet Care</h2>
+                        <h2 class="mb-2 text-4xl tracking-tight  leading-tight text-gray-900 dark:text-white ">Horses: The Complete Guide to Pet Care</h2>
                         <p class="mb-6 text-gray-600 font dark:text-gray-400 md:text-xl">From training and grooming to nutrition and exercise, there's a lot that goes into caring for a dog, but it's worth it as your dog often becomes a part of the family.</p>
                         <a href="#" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Free trial for 30 days</a>
                     </div>
@@ -35,12 +35,12 @@ export default function Home({ data }) {
 
             <section class="bg-white dark:bg-gray-900">
                 <div class="gap-8 items-center  px-4 mx-auto max-w-screen-2xl xl:gap-8  md:grid md:grid-cols-2  lg:px-6">
-                    <img class="w-full dark:hidden" src="https://images.unsplash.com/photo-1558929996-da64ba858215?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=873&q=80" alt="dashboard image" />
+                    <img class="w-full dark:hidden" src="https://images.unsplash.com/photo-1633110664667-d6f7be9709d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="dashboard image" />
                     <div class="mt-4 md:mt-0 ">
                         <h2 class="mb-4 text-6xl tracking-tight  text-gray-800 dark:text-white">Let's create more tools and ideas that brings us together.</h2>
                         <p class="mb-6 text-gray-600 md:text-lg dark:text-gray-400">Flowbite helps you connect with friends and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups.</p>
-                        <a href="/shop/category/dog-supplies" className="inline-flex rounded-full items-center justify-center px-5 mr-auto py-3 text-base  text-center text-gray-800 border border-2 border-gray-500  hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 font-medium">
-                            Shop For Dog Supplies
+                        <a href="#" className="inline-flex rounded-full items-center justify-center px-5 mr-auto py-3 text-base  text-center text-gray-800 border border-2 border-gray-500  hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 font-medium">
+                            Shop For Horse Supplies
                         </a>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ export default function Home({ data }) {
             <section className="bg-white dark:bg-gray-900 max-w-screen-2xl mx-auto px-6 ">
                 <div className="py-8 px-0  mx-auto max-w-screen-2xl sm:py-8 lg:px-0">
                     <div className="mx-auto max-w-screen-2xl text-left">
-                        <h2 className="mb-6 text-4xl tracking-tight text-gray-800 dark:text-white">The Dog Archives</h2>
+                        <h2 className="mb-6 text-4xl tracking-tight text-gray-800 dark:text-white">The Horse Archives</h2>
                     </div>
 
                     <Tabs.Group
@@ -71,7 +71,7 @@ export default function Home({ data }) {
                                     <h2 className="my-2 text-2xl  tracking-tight text-gray-900 dark:text-white">
                                         <a href="#">Pug life</a>
                                     </h2>
-                                    <p className="mb-4  text-gray-700 dark:text-gray-400">Pugs - The Cutest Dogs Ever? We explore the gangster-like dogs that have taken over social media. These little dogs have big personalities, and an even bigger following </p>
+                                    <p className="mb-4  text-gray-700 dark:text-gray-400">Pugs - The Cutest Horses Ever? We explore the gangster-like Horses that have taken over social media. These little Horses have big personalities, and an even bigger following </p>
                                     <a href="#" className="inline-flex items-center  text-primary-600 hover:underline dark:text-primary-500">
                                         Read more
                                         <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -163,13 +163,13 @@ export default function Home({ data }) {
                                 </div>
                             </div>
                         </Tabs.Item>
-                        <Tabs.Item title="Dogs Breeds">
+                        <Tabs.Item title="Horses Breeds">
                             Dashboard content
                         </Tabs.Item>
                         <Tabs.Item title="Dog Lifestyle & Fiteness">
                             Settings content
                         </Tabs.Item>
-                        <Tabs.Item title="Food For Dogs & Nutritional Tips">
+                        <Tabs.Item title="Food For Horses & Nutritional Tips">
                             Contacts content
                         </Tabs.Item>
                         <Tabs.Item
@@ -265,6 +265,7 @@ export default function Home({ data }) {
                     <Tabs.Group
                         aria-label="Default tabs"
                         style="default"
+
 
                     >
                         <Tabs.Item

@@ -63,7 +63,7 @@ const Post = ({ data }) => {
 
 					{/* Top-box-left */}
 					<div>
-						<div className="container py-4 flex items-center gap-3">
+						<div className="container pt-4 pb-8 flex items-center ">
 							<a href="" className="text-primary text-base">
 								<i className="fa-solid fa-house"></i>
 							</a>
@@ -71,35 +71,52 @@ const Post = ({ data }) => {
 								<i className="fa-solid fa-chevron-right"></i>
 							</span>
 
-							<p className="text-gray-600 font-medium">
-								<a href={data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.link}>{data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.name}</a>
-								{" > "}
-								<a href={data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.link}>{data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.name}</a>
-								{" > "}
-								<a href={data?.post?.productTaxonomies?.nodes[0]?.uri}>{data?.post?.productTaxonomies?.nodes[0]?.name}</a>
+							{/* BreadCrumb */}
+							<p className="text-gray-600 pt-2 font-medium">
+								{!isEmpty(data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.parent?.node?.name) ? (
+									<a className="mx-1 text-sm text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5 hover:bg-gray-200" href={data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.parent?.node?.uri}>{data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.parent?.node?.name}</a>
+								) : null}
+
+
+								{!isEmpty(data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.name) ? (
+									<a className="mx-1 text-sm text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5 hover:bg-gray-200" href={data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.link}>{data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.parent?.node?.name}</a>
+								) : null}
+
+
+								{!isEmpty(data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.name) ? (
+									<a className="mx-1 text-sm text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5 hover:bg-gray-200" href={data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.link}>{data?.post?.productTaxonomies?.nodes[0]?.parent?.node?.name}</a>
+								) : null}
+
+								{!isEmpty(data?.post?.productTaxonomies?.nodes[0]?.name) ? (
+									<a className="mx-1 text-sm text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5 hover:bg-gray-200" href={data?.post?.productTaxonomies?.nodes[0]?.uri}>{data?.post?.productTaxonomies?.nodes[0]?.name}</a>
+								) : null}
+
+
+
+
+
+
+
+
 							</p>
 						</div>
-						{console.warn("FUCK", data?.post?.productTaxonomies)}
+
+
 
 						<img src={data?.post?.single_product_acf?.productImageMainUrl} alt="product" className="max-h-96" />
 						<div className="grid grid-cols-5 gap-4 mt-4">
 							{data?.post?.single_product_acf?.productImageGalleryUrls.split(", ").slice(0, 5).map((imageUrl, index) => {
 								return <img onClick={() => { setOpen(true); activeCategory(index) }} key={imageUrl} src={imageUrl} alt="product2" className={isActive(index) ? "..." : ""} />
-
 							}
 							)}
-
-							{/* <button type="button" onClick={() => console.warn(key) setOpen(true)}>
-        Open Lightbox
-      </button> */}
 
 							{data?.post?.single_product_acf?.productImageGalleryUrls.split(", ").map(imageUrl => {
 								slides_list.push({ src: imageUrl })
 							})}
 
-							{/* {slides_list.push({ src: data?.post?.single_product_acf?.productImageMainUrl })} */}
 
 
+							{/* Lightbox  @https://yet-another-react-lightbox.com/*/}
 							<Lightbox
 								open={open}
 								close={() => setOpen(false)}
@@ -113,25 +130,19 @@ const Post = ({ data }) => {
 					{/* Top-box-right */}
 					<div className='flex-col'>
 						<h2 className="text-4xl mb-3 mt-4">{data?.post?.title}</h2>
-						<span className="items-center underline flex text-gray-500 border-b text  font-bold py-1 pb-1.5"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>GET LATEST STAR RATING<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg></span>
+						<span className="items-center underline flex text-gray-500 border-b text  font-bold py-1 pb-1.5"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
 
-						<div className="flex items-center mb-4">
-							<div className="flex gap-1 text-sm text-yellow-400">
-								<span><i className="fa-solid fa-star"></i></span>
-								<span><i className="fa-solid fa-star"></i></span>
-								<span><i className="fa-solid fa-star"></i></span>
-								<span><i className="fa-solid fa-star"></i></span>
-								<span><i className="fa-solid fa-star"></i></span>
-							</div>
-						</div>
+						</svg>GET LATEST STAR RATING<svg className="w-4 h-4 py-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg></span>
+
+
 						<div className="space-y-2">
 							{/* <p className="text-gray-800 font-semibold space-x-2">
 								<span>Availability: </span>
 								<span className="text-green-600">In Stock</span>
 							</p> */}
-							<p className="space-x-2">
+							<p className="space-x-2 mt-4">
 								<span className="text-gray-800 font-semibold">Brand: </span>
-								<a href={data?.post?.productBrands?.nodes[0]?.uri} className="text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5">{data?.post?.productBrands?.nodes[0]?.name}</a>
+								<a href={data?.post?.productBrands?.nodes[0]?.uri} className="text-gray-600 border text-sm border-gray-500 rounded-full px-4  py-1 pb-1.5">{data?.post?.productBrands?.nodes[0]?.name}</a>
 							</p>
 
 							<p className="space-x-2">
@@ -161,15 +172,13 @@ const Post = ({ data }) => {
 							<span className="text-gray-800 font-semibold">Tags: </span>
 
 
-
-
 							{!isEmpty(data?.post?.productTags?.nodes) && isArray(data?.post?.productTags?.nodes) ? (
 								<div>
 									<ul className='flex flex-wrap gap-2'>
 										{data?.post?.productTags?.nodes.map(tag => (
 											<li key={tag.name} className="text-gray-500 dark:text-gray-400 mb-3">
 												<Link href={tag.uri}>
-													<a className="text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5" dangerouslySetInnerHTML={{ __html: sanitize(tag?.name ?? {}) }} />
+													<a className="text-sm text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5" dangerouslySetInnerHTML={{ __html: sanitize(tag?.name ?? {}) }} />
 												</Link>
 											</li>
 										))
@@ -184,14 +193,14 @@ const Post = ({ data }) => {
 						</div>
 
 						<div className="space-x-2 mt-5 flex mb-5">
-							<span className="text-gray-800 font-semibold">Categories: </span>
+							<span className="text-gray-800 font-semibold">Category: </span>
 							{!isEmpty(data?.post?.productTaxonomies?.nodes) && isArray(data?.post?.productTaxonomies?.nodes) ? (
 								<div>
 									<ul className='flex gap-2'>
 										{data?.post?.productTaxonomies?.nodes.map(category => (
 											<li key={category.name} className="text-gray-500 dark:text-gray-400">
 												<Link href={category.uri} key={category.name + 1}>
-													<a className="text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5" dangerouslySetInnerHTML={{ __html: sanitize(category?.name ?? {}) }} />
+													<a className="text-sm text-gray-600 border border-gray-500 rounded-full px-4  py-1 pb-1.5" dangerouslySetInnerHTML={{ __html: sanitize(category?.name ?? {}) }} />
 												</Link>
 											</li>
 										))
@@ -203,7 +212,7 @@ const Post = ({ data }) => {
 
 
 						<div className="font-thin text-sm">
-							SERP AI is reader-supported, and a participant in the Amazon Associate program. When you buy through links on our site, we may earn an affiliate commission. Read more about our policy.
+							{data?.header?.siteTitle} is reader-supported, and a participant in the Amazon Associate program. When you buy through links on our site, we may earn an affiliate commission. Read more about our policy.
 						</div>
 					</div>
 				</div>
@@ -237,17 +246,11 @@ const Post = ({ data }) => {
 							</div>
 
 						</Tabs.Item>
-						<Tabs.Item
-							disabled={true}
-							title="Disabled"
-						>
-							Disabled content
-						</Tabs.Item>
 					</Tabs.Group>
 				</div>
 
 				{/*comments-section*/}
-				<div className='flex mx-auto max-w-screen-2xl   flex-auto'>
+				<div className='flex mx-auto max-w-screen-2xl  px-8 flex-auto'>
 
 					{/* Left-box of Comments */}
 					<div className='w-96  pb-8'>
